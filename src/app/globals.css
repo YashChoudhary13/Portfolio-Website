@@ -1,0 +1,136 @@
+@import "tailwindcss";
+
+@theme {
+  /* ------ color system ------ */
+  --color-base: #050505;
+  --color-raised: #0a0a0b;
+  --color-ink: #ffffff;
+  --color-ink-65: rgba(255, 255, 255, 0.65);
+  --color-ink-40: rgba(255, 255, 255, 0.4);
+  --color-ink-25: rgba(255, 255, 255, 0.25);
+  --color-hairline: rgba(255, 255, 255, 0.08);
+  --color-glass: rgba(255, 255, 255, 0.04);
+  --color-accent: #66f0c2;
+  --color-accent-dim: rgba(102, 240, 194, 0.35);
+
+  /* ------ typography ------ */
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
+  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-mono: var(--font-plex-mono), ui-monospace, monospace;
+
+  /* fluid display scale — 48px mobile → 120px+ desktop */
+  --text-display-xl: clamp(3rem, 1rem + 9.5vw, 10rem);
+  --text-display-lg: clamp(2.5rem, 0.9rem + 7vw, 7.5rem);
+  --text-display-md: clamp(2rem, 1rem + 4vw, 4.5rem);
+
+  /* ------ easing (expensive motion) ------ */
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-out-quart: cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-in-out-soft: cubic-bezier(0.65, 0, 0.35, 1);
+}
+
+/* ------ base ------ */
+
+html {
+  background: var(--color-base);
+  color-scheme: dark;
+}
+
+body {
+  background: var(--color-base);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--color-accent);
+  color: var(--color-base);
+}
+
+/* lenis smooth scroll */
+html.lenis,
+html.lenis body {
+  height: auto;
+}
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* thin dark scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: var(--color-base);
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.14);
+  border-radius: 999px;
+  border: 3px solid var(--color-base);
+}
+
+/* ------ utilities ------ */
+
+@utility container-x {
+  padding-inline: clamp(1.25rem, 5vw, 5rem);
+  margin-inline: auto;
+  width: 100%;
+  max-width: 100rem;
+}
+
+/* massive editorial display type */
+@utility text-display {
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-variation-settings: "wdth" 118;
+  letter-spacing: -0.045em;
+  line-height: 0.92;
+  text-wrap: balance;
+}
+
+/* small technical mono label */
+@utility text-eyebrow {
+  font-family: var(--font-mono);
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--color-ink-40);
+}
+
+/* floating glass panel */
+@utility glass-panel {
+  background: linear-gradient(
+    145deg,
+    rgba(255, 255, 255, 0.07),
+    rgba(255, 255, 255, 0.02)
+  );
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+/* hairline divider */
+@utility hairline {
+  border-color: var(--color-hairline);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

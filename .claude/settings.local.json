@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "PowerShell(node --version)",
+      "PowerShell(npm --version)",
+      "PowerShell(npm install next@15 react@19 react-dom@19 framer-motion gsap lenis three @react-three/fiber @react-three/drei)",
+      "PowerShell(npm install -D typescript @types/node @types/react @types/react-dom @types/three tailwindcss @tailwindcss/postcss)",
+      "PowerShell(ffmpeg -version)",
+      "PowerShell(ffprobe -version)",
+      "PowerShell(git *)"
+    ]
+  }
+}
