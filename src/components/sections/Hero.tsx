@@ -8,8 +8,9 @@ import { hero, identity } from "@/lib/content";
 import { EASE_OUT_EXPO } from "@/lib/motion";
 
 /**
- * S1 — Hero (DESIGN_ANALYSIS §2). One dominant type element; cards float
- * to the right; the whole block parallax-fades on exit.
+ * S1 — Hero, matched to reference anatomy: one-line name (display-xl),
+ * gray body subline, three tilted panels scattered horizontally below.
+ * The whole block parallax-fades on exit.
  */
 export default function Hero() {
   const ref = useRef<HTMLElement>(null);
@@ -19,7 +20,7 @@ export default function Hero() {
   });
   const contentY = useTransform(scrollYProgress, [0, 1], ["0%", "-10%"]);
   const contentOpacity = useTransform(scrollYProgress, [0, 0.85], [1, 0.35]);
-  const cardsY = useTransform(scrollYProgress, [0, 1], ["0%", "-22%"]);
+  const cardsY = useTransform(scrollYProgress, [0, 1], ["0%", "-20%"]);
 
   return (
     <section
@@ -39,7 +40,7 @@ export default function Hero() {
 
       <motion.div
         style={{ y: contentY, opacity: contentOpacity }}
-        className="container-x flex flex-1 flex-col justify-center pt-32 pb-24"
+        className="container-x flex flex-1 flex-col justify-center pb-28 pt-32"
       >
         {/* eyebrow row */}
         <Reveal className="flex items-baseline justify-between gap-6 border-b hairline pb-4">
@@ -49,43 +50,28 @@ export default function Hero() {
           </span>
         </Reveal>
 
-        <div className="relative mt-12 lg:mt-16">
-          <MaskLines
-            as="h1"
-            lines={[...hero.lines]}
-            className="text-display uppercase"
-            lineClassName="text-[length:var(--text-display-xl)]"
-          />
-          <MaskLines
-            as="p"
-            delay={0.18}
-            lines={[hero.subline]}
-            className="text-display mt-6 max-w-[18ch] text-ink-65"
-            lineClassName="text-[length:var(--text-display-md)]"
-          />
+        <MaskLines
+          as="h1"
+          lines={[hero.name]}
+          className="text-display mt-12"
+          lineClassName="text-[length:var(--text-display-xl)]"
+        />
 
-          {/* floating cards — overlap the type block's right edge on desktop */}
-          <motion.div
-            style={{ y: cardsY }}
-            className="relative mt-16 lg:absolute lg:-top-8 lg:right-0 lg:mt-0 lg:h-[30rem] lg:w-[26rem]"
-          >
-            <HeroCards />
-          </motion.div>
-        </div>
-
-        <Reveal
-          delay={0.5}
-          className="mt-16 max-w-[34rem] lg:mt-24 lg:ml-[41.666%]"
-        >
-          <p className="text-base leading-relaxed text-ink-65 sm:text-lg">
-            {hero.body}
+        <Reveal delay={0.25} className="mt-6 max-w-[44rem]">
+          <p className="text-lg leading-relaxed text-ink-65 sm:text-xl">
+            {hero.subline}
           </p>
         </Reveal>
+
+        {/* tilted panel scatter */}
+        <motion.div style={{ y: cardsY }} className="mt-14 lg:mt-16">
+          <HeroCards />
+        </motion.div>
       </motion.div>
 
       {/* scroll cue */}
       <motion.div
-        className="container-x pointer-events-none absolute inset-x-0 bottom-8 flex items-center gap-4"
+        className="container-x pointer-events-none absolute inset-x-0 bottom-7 flex items-center gap-4"
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         transition={{ delay: 1.6, duration: 1, ease: EASE_OUT_EXPO }}

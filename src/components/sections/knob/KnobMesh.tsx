@@ -3,12 +3,11 @@
 import { useMemo, useRef } from "react";
 import * as THREE from "three";
 import { useFrame } from "@react-three/fiber";
-import { Environment, Instance, Instances, Lightformer } from "@react-three/drei";
+import { Environment, Lightformer } from "@react-three/drei";
 import type { MotionValue } from "framer-motion";
 import { createBrushedMaps } from "./knobTextures";
 
-const RIDGES = 72;
-const TILT = 0.12; // slight lean back — face-on with depth
+const TILT = 0.1; // slight lean back — face-on with depth
 
 /**
  * The machined knob (DESIGN_ANALYSIS §1.7): lathe-profiled aluminum body,
@@ -31,19 +30,31 @@ export default function KnobMesh({
 
   const maps = useMemo(() => createBrushedMaps(), []);
 
-  // chamfered lathe profile: center → machined groove → top face → bevel → wall
+  // face profile: broad spun face → machined groove → raised outer band →
+  // chamfer to the wall (wall hides inside the bezel, like the reference)
   const profile = useMemo(() => {
     const pts: THREE.Vector2[] = [
       new THREE.Vector2(0.001, 0.42),
-      new THREE.Vector2(0.6, 0.42),
-      new THREE.Vector2(0.63, 0.405), // machined groove
-      new THREE.Vector2(0.66, 0.42),
+      new THREE.Vector2(0.78, 0.42),
+      new THREE.Vector2(0.8, 0.408), // machined groove
       new THREE.Vector2(0.82, 0.42),
-      new THREE.Vector2(0.9, 0.395), // chamfer
-      new THREE.Vector2(0.97, 0.33),
-      new THREE.Vector2(1.0, 0.24),
+      new THREE.Vector2(0.94, 0.42), // outer band
+      new THREE.Vector2(0.985, 0.385), // chamfer
+      new THREE.Vector2(1.0, 0.3),
       new THREE.Vector2(1.0, 0.0),
-      new THREE.Vector2(0.93, 0.0),
+    ];
+    return pts;
+  }, []);
+
+  // near-black satin bezel surrounding the face
+  const bezelProfile = useMemo(() => {
+    const pts: THREE.Vector2[] = [
+      new THREE.Vector2(1.005, 0.0),
+      new THREE.Vector2(1.005, 0.3),
+      new THREE.Vector2(1.05, 0.345), // inner chamfer
+      new THREE.Vector2(1.17, 0.345),
+      new THREE.Vector2(1.23, 0.27), // outer roll-off
+      new THREE.Vector2(1.23, 0.0),
     ];
     return pts;
   }, []);
@@ -63,12 +74,13 @@ export default function KnobMesh({
     [maps],
   );
 
-  const ridgeMaterial = useMemo(
+  const bezelMaterial = useMemo(
     () =>
       new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#aeb4bb"),
-        metalness: 1,
-        roughness: 0.45,
+        color: new THREE.Color("#121416"),
+        metalness: 0.7,
+        roughness: 0.5,
+        clearcoat: 0.15,
       }),
     [],
   );
@@ -86,30 +98,20 @@ export default function KnobMesh({
   return (
     <>
       <group rotation={[Math.PI / 2 - TILT, 0, 0]}>
+        {/* static bezel ring */}
+        <mesh material={bezelMaterial}>
+          <latheGeometry args={[bezelProfile, 128]} />
+        </mesh>
+
         <group ref={spin}>
-          {/* body */}
+          {/* spun-aluminum face */}
           <mesh material={aluminum}>
             <latheGeometry args={[profile, 128]} />
           </mesh>
 
-          {/* grip ridges around the wall */}
-          <Instances range={RIDGES} material={ridgeMaterial} frustumCulled={false}>
-            <boxGeometry args={[0.016, 0.2, 0.05]} />
-            {Array.from({ length: RIDGES }, (_, i) => {
-              const a = (i / RIDGES) * Math.PI * 2;
-              return (
-                <Instance
-                  key={i}
-                  position={[Math.sin(a) * 1.0, 0.12, Math.cos(a) * 1.0]}
-                  rotation={[0, a, 0]}
-                />
-              );
-            })}
-          </Instances>
-
           {/* accent index dot at 12 o'clock */}
-          <mesh position={[0, 0.43, -0.72]} rotation={[0, 0, 0]}>
-            <cylinderGeometry args={[0.035, 0.035, 0.015, 24]} />
+          <mesh position={[0, 0.43, -0.68]}>
+            <cylinderGeometry args={[0.038, 0.038, 0.015, 24]} />
             <meshStandardMaterial
               color="#66f0c2"
               emissive="#66f0c2"

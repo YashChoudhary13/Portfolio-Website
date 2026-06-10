@@ -27,7 +27,7 @@ export default function CaseStudy({
 
   return (
     <article className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
-      {/* hero visual */}
+      {/* hero visual — header strip + footer meta, like the reference cards */}
       <motion.div
         className={`group relative overflow-hidden rounded-2xl border hairline bg-raised lg:col-span-7 ${
           flip ? "lg:order-2" : ""
@@ -37,12 +37,22 @@ export default function CaseStudy({
         whileInView="visible"
         viewport={VIEWPORT_ONCE}
       >
+        <div className="flex items-baseline justify-between border-b hairline bg-white/[0.025] px-5 py-3.5">
+          <span className="text-[15px] font-semibold tracking-tight text-ink">
+            {project.name}
+          </span>
+          <span className="text-eyebrow">{project.date}</span>
+        </div>
         <div className="aspect-[4/3] w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
           <Visual />
         </div>
-        <div className="pointer-events-none absolute inset-x-0 bottom-0 flex translate-y-2 items-center justify-between p-5 opacity-0 transition-all duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:translate-y-0 group-hover:opacity-100">
-          <span className="text-eyebrow">{project.tagline}</span>
-          <span className="text-eyebrow">{project.date}</span>
+        <div className="flex items-baseline justify-between border-t hairline px-5 py-3.5">
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-40">
+            {project.category}
+          </span>
+          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-25 transition-colors duration-500 group-hover:text-accent">
+            View case ↓
+          </span>
         </div>
       </motion.div>
 

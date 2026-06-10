@@ -14,8 +14,8 @@
   --color-accent-dim: rgba(102, 240, 194, 0.35);
 
   /* ------ typography ------ */
-  --font-sans: var(--font-archivo), system-ui, sans-serif;
-  --font-display: var(--font-archivo), system-ui, sans-serif;
+  --font-sans: var(--font-inter), system-ui, sans-serif;
+  --font-display: var(--font-inter), system-ui, sans-serif;
   --font-mono: var(--font-plex-mono), ui-monospace, monospace;
 
   /* fluid display scale — 48px mobile → 120px+ desktop */
@@ -87,13 +87,13 @@ html.lenis body {
   max-width: 100rem;
 }
 
-/* massive editorial display type */
+/* massive editorial display type — heavy sentence-case neo-grotesque,
+   matched to reference (Inter Display genre, ~800, tight but not crushed) */
 @utility text-display {
   font-family: var(--font-display);
   font-weight: 800;
-  font-variation-settings: "wdth" 118;
-  letter-spacing: -0.045em;
-  line-height: 0.92;
+  letter-spacing: -0.035em;
+  line-height: 0.97;
   text-wrap: balance;
 }
 

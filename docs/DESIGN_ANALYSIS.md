@@ -14,19 +14,44 @@ Sources used, in order of authority:
 3. **Genre knowledge** — established Awwwards dark-editorial conventions this
    reference belongs to (Lenis smoothing, mask reveals, magnetic hovers, grain).
 
-**Verification queue** — to check against the recording when tooling recovers
-(classifier outage blocks ffmpeg/web; see PROJECT_STATE.md):
+**Verification queue — RESOLVED 2026-06-11 via frame-by-frame study of the
+recording** (40 frames @1fps + 48 frames @8fps on the knob window):
 
-- [ ] Exact display typeface identity (plan: Archivo wdth≈118; candidates: Neue Montreal, Helvetica Now Display, Söhne)
-- [ ] Section order after hero (assumed: metrics → knob → projects → architecture → experience → about → contact)
-- [ ] Nav behavior on scroll (assumed: persistent glass pill, hide-on-scroll-down/show-on-up)
-- [ ] Whether knob section pins during state changes (assumed: NOT pinned; in-place content swap)
-- [ ] Hero card idle-float amplitude/period; exact tilt range
-- [ ] Text reveal style: line-mask slide-up vs plain fade-rise (assumed line-mask for display, fade-rise for body)
-- [ ] Footer treatment (assumed: huge wordmark + hairline meta row)
-- [ ] Any preloader/intro sequence (assumed: brief counter/wordmark fade — optional, low priority)
-
-None of these change the architecture; they tune constants and copy of motion.
+- [x] **Typeface**: heavy sentence-case neo-grotesque (Helvetica Now/Inter
+      Display genre), weight ~800, tracking ~-0.03em, leading ~0.95.
+      **NOT uppercase, NOT expanded.** → switch display font to Inter
+      (variable, opsz axis), drop wdth 118 + uppercase everywhere.
+- [x] **Reference palette**: dark hero/story sections + LIGHT work sections.
+      Master spec mandates all-dark (#050505) — spec governs palette;
+      recording governs structure/motion/anatomy.
+- [x] **Nav**: wide dark bar (rounded ~12px, not a pill), logo + links left
+      cluster, right cluster "Say hi!" + social icons; persistent.
+- [x] **Hero anatomy**: name on ONE line (display-xl), subline is ~22px gray
+      BODY text (not display), 3 cards in a horizontal overlapping scatter
+      BELOW the text (rest rotations ≈ -7°/3°/8°), each card = solid dark
+      panel with a header strip (title row + hairline) and playful content
+      (tinted pill chips / squiggle-path photos / objects).
+- [x] **Metrics**: 3 columns w/ vertical hairlines; bold title carrying the
+      number + gray sub-line (icons in reference → mono indices in ours).
+- [x] **KNOB (critical)**: ~480px dial; near-black bezel ring; spun-metal
+      face (starburst conic sheen = radial anisotropy ✓ our approach);
+      green dot ON the face near rim points at active position; 4 detents
+      at DIAGONALS (1=BL 225°, 2=TL 315°, 3=TR 45°, 4=BR 135°); fine tick
+      ring + numbers live in the PAGE around the dial; active number
+      darkens w/ emphasized tick. Content = LEFT-side ACCORDION (bold
+      titles, hairline-separated; active expands gray body). Click cycles
+      clockwise; clicking an accordion row drives the knob too. No section
+      pinning.
+- [x] **Projects**: cards have static header strip (name) + footer meta
+      (category) — adopt strips on our editorial case-study frames.
+- [x] **Testimonials**: draggable fanned card deck exists in reference —
+      SKIPPED: no testimonial content in resume; nothing to invent.
+- [x] **Contact**: CENTERED "Let's build something" display-xl on ambient
+      teal→dark gradient; CTA = tilted (-8°) dark "Say hi!" sticker card
+      (mailto); small gray caption + logo strip beneath (ours: socials).
+- [x] **Reveals**: plain fade/rise dominates; no fancy per-line masks
+      visible at 1fps — keep our mask-lines for display (premium-plus)
+      but with sentence case.
 
 ---
 

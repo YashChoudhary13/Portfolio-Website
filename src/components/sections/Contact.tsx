@@ -1,69 +1,95 @@
 "use client";
 
+import { motion } from "framer-motion";
 import Eyebrow from "@/components/shared/Eyebrow";
 import { MaskLines, Reveal } from "@/components/shared/Reveal";
 import Magnetic from "@/components/shared/Magnetic";
 import SlideSwapLink from "@/components/shared/SlideSwapLink";
 import { contact, identity, socials } from "@/lib/content";
+import { EASE_OUT_EXPO, VIEWPORT_ONCE } from "@/lib/motion";
 
 /**
- * S8 — Contact (DESIGN_ANALYSIS §S8). Huge type, one CTA, nothing else
- * competing for attention.
+ * S8 — Contact, matched to reference: centered huge type on an ambient
+ * teal→dark field, with a tilted "Say hi!" sticker as the only CTA.
  */
 export default function Contact() {
   return (
     <section
       id="contact"
-      className="container-x pt-[clamp(6rem,16vh,14rem)] pb-24"
+      className="relative overflow-clip pt-[clamp(6rem,16vh,14rem)] pb-24"
       aria-label="Contact"
     >
-      <Eyebrow
-        right={
-          identity.available ? (
-            <span className="flex items-center gap-2">
-              <span className="size-1.5 rounded-full bg-accent" />
-              Available for work
-            </span>
-          ) : undefined
-        }
-      >
-        07 — Contact
-      </Eyebrow>
-
-      <MaskLines
-        as="h2"
-        lines={[contact.lines[0], <span key="l2" className="text-ink-65">{contact.lines[1]}</span>]}
-        className="text-display mt-14 uppercase"
-        lineClassName="text-[length:var(--text-display-xl)]"
+      {/* ambient field */}
+      <div
+        aria-hidden
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(60% 50% at 20% 0%, rgba(102,240,194,0.07), transparent 70%), radial-gradient(55% 45% at 80% 8%, rgba(90,140,255,0.05), transparent 70%)",
+        }}
       />
 
-      <div className="mt-16 flex flex-col gap-10 sm:flex-row sm:items-end sm:justify-between">
-        <Reveal delay={0.2}>
-          <p className="max-w-[26rem] leading-relaxed text-ink-65">{contact.body}</p>
-          <Magnetic strength={10} className="mt-8">
-            <a
-              href={`mailto:${identity.email}`}
-              className="glass-panel inline-flex items-center gap-3 rounded-full px-7 py-4 font-mono text-xs uppercase tracking-[0.16em] text-ink transition-colors duration-500 hover:border-accent/40"
-            >
-              {identity.email}
-              <span className="text-accent">↗</span>
-            </a>
-          </Magnetic>
-        </Reveal>
+      <div className="container-x relative">
+        <Eyebrow
+          right={
+            identity.available ? (
+              <span className="flex items-center gap-2">
+                <span className="size-1.5 rounded-full bg-accent" />
+                Available for work
+              </span>
+            ) : undefined
+          }
+        >
+          07 — Contact
+        </Eyebrow>
 
-        <Reveal delay={0.3} className="flex gap-7">
-          {socials.map((social) => (
-            <SlideSwapLink
-              key={social.label}
-              href={social.href}
-              target="_blank"
-              rel="noreferrer"
-              className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-65 hover:text-ink"
-              label={social.label}
-              suffix={<span className="text-ink-40">↗</span>}
-            />
-          ))}
-        </Reveal>
+        <div className="mt-20 flex flex-col items-center text-center">
+          <MaskLines
+            as="h2"
+            lines={[...contact.lines]}
+            className="text-display"
+            lineClassName="text-[length:var(--text-display-xl)]"
+          />
+
+          {/* tilted sticker CTA, overlapping the headline's baseline */}
+          <Magnetic strength={12} className="-mt-4 sm:-mt-8">
+            <motion.a
+              href={`mailto:${identity.email}`}
+              aria-label={`Email ${identity.email}`}
+              className="block rounded-2xl border hairline bg-[#101214] px-10 py-5 shadow-[0_30px_70px_rgba(0,0,0,0.6)] sm:px-12 sm:py-6"
+              initial={{ opacity: 0, y: 40, rotate: -14 }}
+              whileInView={{ opacity: 1, y: 0, rotate: -7 }}
+              viewport={VIEWPORT_ONCE}
+              whileHover={{ rotate: 0, scale: 1.05 }}
+              transition={{ duration: 0.8, ease: EASE_OUT_EXPO, delay: 0.35 }}
+            >
+              <span className="text-display text-3xl sm:text-4xl">
+                Say hi<span className="text-accent">!</span>
+              </span>
+            </motion.a>
+          </Magnetic>
+
+          <Reveal delay={0.5} className="mt-14">
+            <p className="leading-relaxed text-ink-65">{contact.body}</p>
+            <p className="mt-2 font-mono text-[11px] tracking-[0.1em] text-ink-40">
+              {identity.email}
+            </p>
+          </Reveal>
+
+          <Reveal delay={0.6} className="mt-10 flex gap-8">
+            {socials.map((social) => (
+              <SlideSwapLink
+                key={social.label}
+                href={social.href}
+                target="_blank"
+                rel="noreferrer"
+                className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink-65 hover:text-ink"
+                label={social.label}
+                suffix={<span className="text-ink-40">↗</span>}
+              />
+            ))}
+          </Reveal>
+        </div>
       </div>
     </section>
   );

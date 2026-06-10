@@ -27,25 +27,13 @@ export const nav = [
 export const hero = {
   eyebrowLeft: "Portfolio — 2026",
   eyebrowRight: "Jaipur, IN (UTC+5:30)",
-  lines: ["Yash", "Choudhary"],
-  subline: "Full-Stack Engineer & AI Systems Builder",
-  body: "I build RAG-powered LLM systems at a GenAI internship and ship full-stack products clients pay for — from model ensembles to checkout flows, deployed and in production.",
+  name: "Yash Choudhary",
+  subline:
+    "Full-stack engineer & AI systems builder — building RAG-powered LLM workflows at a GenAI internship and shipping production platforms clients pay for.",
   cards: [
-    {
-      index: "01",
-      title: "AI Engineering",
-      meta: "RAG · LLM pipelines · PyTorch",
-    },
-    {
-      index: "02",
-      title: "Full Stack Systems",
-      meta: "Next.js · Node · PostgreSQL",
-    },
-    {
-      index: "03",
-      title: "Production Deployments",
-      meta: "Docker · CI/CD · Paid client work",
-    },
+    { index: "01", title: "AI Engineering" },
+    { index: "02", title: "Full Stack Systems" },
+    { index: "03", title: "Production Deployments" },
   ],
 } as const;
 
@@ -116,6 +104,7 @@ export const projects = [
     index: "01",
     name: "DeepVerify",
     tagline: "Multi-model deepfake detection",
+    category: "ML systems / Computer vision",
     date: "Dec 2025",
     problem: "Single-model detectors misfire on synthetic imagery — too many false positives to trust in production.",
     architecture: "Next.js front end → async FastAPI inference API → Redis queue → five-model PyTorch ensemble → Dockerized deployment.",
@@ -134,6 +123,7 @@ export const projects = [
     index: "02",
     name: "REVO",
     tagline: "GitHub repository analyzer — Chrome extension",
+    category: "Developer tools / Browser extension",
     date: "Oct 2025",
     problem: "Evaluating an unfamiliar repository costs ten minutes of manual reading before you know if it's worth your time.",
     architecture: "Manifest V3 extension injecting a React UI into GitHub pages → GitHub REST API behind a caching layer → structured JSON exports for LLM summarization.",

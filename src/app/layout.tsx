@@ -1,14 +1,14 @@
 import type { Metadata, Viewport } from "next";
-import { Archivo, IBM_Plex_Mono } from "next/font/google";
+import { Inter, IBM_Plex_Mono } from "next/font/google";
 import "./globals.css";
 import SmoothScroll from "@/components/providers/SmoothScroll";
 import Nav from "@/components/layout/Nav";
 import Grain from "@/components/shared/Grain";
 
-const archivo = Archivo({
+const inter = Inter({
   subsets: ["latin"],
-  variable: "--font-archivo",
-  axes: ["wdth"],
+  variable: "--font-inter",
+  axes: ["opsz"],
   display: "swap",
 });
 
@@ -33,7 +33,7 @@ export default function RootLayout({
   children,
 }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={`${archivo.variable} ${plexMono.variable}`}>
+    <html lang="en" className={`${inter.variable} ${plexMono.variable}`}>
       <body>
         <SmoothScroll>
           <Nav />

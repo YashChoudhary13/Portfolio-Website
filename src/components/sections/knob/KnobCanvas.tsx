@@ -27,7 +27,7 @@ export default function KnobCanvas({
     <Canvas
       dpr={[1, 2]}
       frameloop={active ? "always" : "never"}
-      camera={{ position: [0, 0.55, 4.4], fov: 26 }}
+      camera={{ position: [0, 0.5, 4.4], fov: 34 }}
       gl={{ antialias: true, alpha: true, powerPreference: "high-performance" }}
       onCreated={({ camera }) => camera.lookAt(0, 0, 0)}
       style={{ touchAction: "none" }}
