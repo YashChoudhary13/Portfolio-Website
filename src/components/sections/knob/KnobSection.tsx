@@ -64,10 +64,12 @@ function TickRing({ activeIndex }: { activeIndex: number }) {
     const r1 = major ? 44.5 : 46.5;
     const r2 = 48.5;
     const rad = ((angleDeg - 90) * Math.PI) / 180;
-    const x1 = 50 + r1 * Math.cos(rad);
-    const y1 = 50 + r1 * Math.sin(rad);
-    const x2 = 50 + r2 * Math.cos(rad);
-    const y2 = 50 + r2 * Math.sin(rad);
+    // round to avoid SSR/client float drift in the last digit (hydration)
+    const fix = (n: number) => Math.round(n * 1000) / 1000;
+    const x1 = fix(50 + r1 * Math.cos(rad));
+    const y1 = fix(50 + r1 * Math.sin(rad));
+    const x2 = fix(50 + r2 * Math.cos(rad));
+    const y2 = fix(50 + r2 * Math.sin(rad));
     return (
       <line
         key={i}

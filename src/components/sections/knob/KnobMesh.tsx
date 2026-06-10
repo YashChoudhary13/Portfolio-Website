@@ -1,18 +1,17 @@
 "use client";
 
-import { useMemo, useRef } from "react";
+import { useEffect, useMemo, useRef } from "react";
 import * as THREE from "three";
-import { useFrame } from "@react-three/fiber";
-import { Environment, Lightformer } from "@react-three/drei";
+import { useFrame, useThree } from "@react-three/fiber";
 import type { MotionValue } from "framer-motion";
-import { createBrushedMaps } from "./knobTextures";
+import { createBrushedMaps, createStudioEnv } from "./knobTextures";
 
 const TILT = 0.1; // slight lean back — face-on with depth
 
 /**
- * The machined knob (DESIGN_ANALYSIS §1.7): lathe-profiled aluminum body,
- * 72 grip ridges, accent index dot, procedural Lightformer studio for the
- * anisotropic streaks, and a cursor-tracked key light.
+ * The machined knob (DESIGN_ANALYSIS §1.7): lathe-profiled spun-aluminum
+ * face inside a near-black bezel, lit by a procedural studio environment
+ * and a cursor-tracked key light. Physical light units (three r155+).
  */
 export default function KnobMesh({
   rotation,
@@ -29,58 +28,54 @@ export default function KnobMesh({
   const key = useRef<THREE.PointLight>(null);
 
   const maps = useMemo(() => createBrushedMaps(), []);
+  const envTex = useMemo(() => createStudioEnv(), []);
+  const scene = useThree((s) => s.scene);
 
-  // face profile: broad spun face → machined groove → raised outer band →
-  // chamfer to the wall (wall hides inside the bezel, like the reference)
-  const profile = useMemo(() => {
-    const pts: THREE.Vector2[] = [
-      new THREE.Vector2(0.001, 0.42),
-      new THREE.Vector2(0.78, 0.42),
-      new THREE.Vector2(0.8, 0.408), // machined groove
-      new THREE.Vector2(0.82, 0.42),
-      new THREE.Vector2(0.94, 0.42), // outer band
-      new THREE.Vector2(0.985, 0.385), // chamfer
-      new THREE.Vector2(1.0, 0.3),
-      new THREE.Vector2(1.0, 0.0),
-    ];
-    return pts;
-  }, []);
+  useEffect(() => {
+    scene.environment = envTex;
+    return () => {
+      scene.environment = null;
+    };
+  }, [scene, envTex]);
 
-  // near-black satin bezel surrounding the face
-  const bezelProfile = useMemo(() => {
-    const pts: THREE.Vector2[] = [
-      new THREE.Vector2(1.005, 0.0),
-      new THREE.Vector2(1.005, 0.3),
-      new THREE.Vector2(1.05, 0.345), // inner chamfer
-      new THREE.Vector2(1.17, 0.345),
-      new THREE.Vector2(1.23, 0.27), // outer roll-off
-      new THREE.Vector2(1.23, 0.0),
-    ];
-    return pts;
-  }, []);
-
+  // Geometry is composed from primitives (cylinder caps, rings) — their
+  // normals are guaranteed correct, and the face cap's planar UVs map the
+  // disc-designed roughness/anisotropy textures 1:1.
   const aluminum = useMemo(
     () =>
       new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#c9ced4"),
+        color: new THREE.Color("#b9bec4"),
         metalness: 1,
-        roughness: 0.32,
+        roughness: 0.38,
         roughnessMap: maps.roughnessMap,
-        anisotropy: 0.9,
+        anisotropy: 1.0,
         anisotropyMap: maps.anisotropyMap,
         clearcoat: 0.25,
         clearcoatRoughness: 0.2,
+        envMapIntensity: 0.8,
       }),
     [maps],
+  );
+
+  const grooveMaterial = useMemo(
+    () =>
+      new THREE.MeshPhysicalMaterial({
+        color: new THREE.Color("#7d838a"),
+        metalness: 1,
+        roughness: 0.5,
+        envMapIntensity: 1.2,
+      }),
+    [],
   );
 
   const bezelMaterial = useMemo(
     () =>
       new THREE.MeshPhysicalMaterial({
-        color: new THREE.Color("#121416"),
-        metalness: 0.7,
-        roughness: 0.5,
-        clearcoat: 0.15,
+        color: new THREE.Color("#16181b"),
+        metalness: 0.75,
+        roughness: 0.45,
+        clearcoat: 0.2,
+        envMapIntensity: 1.1,
       }),
     [],
   );
@@ -91,27 +86,43 @@ export default function KnobMesh({
     }
     if (key.current) {
       key.current.position.set(lightX.get() * 2.6, 0.6 + lightY.get() * -1.6, 3.2);
-      key.current.intensity = 6 + lightBoost.get() * 7;
+      key.current.intensity = 22 + lightBoost.get() * 30;
     }
   });
 
   return (
     <>
       <group rotation={[Math.PI / 2 - TILT, 0, 0]}>
-        {/* static bezel ring */}
-        <mesh material={bezelMaterial}>
-          <latheGeometry args={[bezelProfile, 128]} />
+        {/* static bezel: wall + flat top ring */}
+        <mesh material={bezelMaterial} position={[0, 0.17, 0]}>
+          <cylinderGeometry args={[1.23, 1.23, 0.35, 128, 1, true]} />
+        </mesh>
+        <mesh
+          material={bezelMaterial}
+          position={[0, 0.345, 0]}
+          rotation={[-Math.PI / 2, 0, 0]}
+        >
+          <ringGeometry args={[0.998, 1.23, 128]} />
         </mesh>
 
         <group ref={spin}>
-          {/* spun-aluminum face */}
-          <mesh material={aluminum}>
-            <latheGeometry args={[profile, 128]} />
+          {/* spun-aluminum body — cap carries the starburst */}
+          <mesh material={aluminum} position={[0, 0.2, 0]}>
+            <cylinderGeometry args={[0.995, 0.995, 0.4, 128]} />
+          </mesh>
+
+          {/* machined groove ring inset into the face */}
+          <mesh
+            material={grooveMaterial}
+            position={[0, 0.4005, 0]}
+            rotation={[-Math.PI / 2, 0, 0]}
+          >
+            <ringGeometry args={[0.78, 0.812, 128]} />
           </mesh>
 
           {/* accent index dot at 12 o'clock */}
-          <mesh position={[0, 0.43, -0.68]}>
-            <cylinderGeometry args={[0.038, 0.038, 0.015, 24]} />
+          <mesh position={[0, 0.402, -0.68]}>
+            <cylinderGeometry args={[0.038, 0.038, 0.012, 24]} />
             <meshStandardMaterial
               color="#66f0c2"
               emissive="#66f0c2"
@@ -122,41 +133,9 @@ export default function KnobMesh({
         </group>
       </group>
 
-      {/* cursor-tracked key light — moves the reflections */}
-      <pointLight ref={key} position={[0, 0.6, 3.2]} intensity={6} decay={2} distance={12} />
-      <ambientLight intensity={0.15} />
-
-      {/* procedural studio — the long streak reflections live here */}
-      <Environment frames={1} resolution={256}>
-        <Lightformer
-          form="rect"
-          intensity={5}
-          scale={[9, 1.1, 1]}
-          position={[0, 4, 2.5]}
-          rotation={[-Math.PI / 3.2, 0, 0]}
-        />
-        <Lightformer
-          form="rect"
-          intensity={2.2}
-          scale={[1.2, 6, 1]}
-          position={[-5, 0.5, 2]}
-          rotation={[0, Math.PI / 3, 0]}
-          color="#dceaf5"
-        />
-        <Lightformer
-          form="rect"
-          intensity={1.6}
-          scale={[1.1, 5, 1]}
-          position={[5, -0.5, 2]}
-          rotation={[0, -Math.PI / 3, 0]}
-        />
-        <Lightformer
-          form="ring"
-          intensity={0.8}
-          scale={5}
-          position={[0, 1, 5]}
-        />
-      </Environment>
+      {/* cursor-tracked key light — moves the speculars (physical units) */}
+      <pointLight ref={key} position={[0, 0.6, 3.2]} intensity={22} decay={2} distance={14} />
+      <ambientLight intensity={0.2} />
     </>
   );
 }

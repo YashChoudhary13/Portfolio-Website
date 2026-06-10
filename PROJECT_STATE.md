@@ -12,20 +12,18 @@ deliverables); recording frame-study deferred (see verification queue §0).
 All sections written: Hero, Metrics, Knob (R3F), Projects, Architecture,
 Experience, About, Contact, Footer — composed in src/app/page.tsx.
 
-## Outstanding environment blocker
+## Environment blocker — RESOLVED
 
-Claude Code's permission classifier (approves shell/web commands) has been down
-this session. **File reads/writes work; command execution, web fetches, and git
-are gated.** Per user instruction: no retry loops — single probes only at
-natural milestone boundaries.
+The permission-classifier outage cleared mid-session. Since then:
+`git init` + 2 commits (74253e0 root, 63e8f99 refinement), `npm run build`
+passing (218 kB first load, three.js lazily chunked), ffmpeg frames extracted
+(40 @1fps + 48 @8fps knob window), verification queue in DESIGN_ANALYSIS §0
+fully resolved, reference-matched refinement pass applied (Inter, nav bar
+anatomy, hero scatter, metrics columns, knob accordion + diagonal detents +
+bezel, case-study strips, contact sticker CTA).
 
-Deferred until commands clear (queued, in order):
-1. ffmpeg-static install → frame extraction from reference recording →
-   tune the verification-queue constants in DESIGN_ANALYSIS.md §0
-2. hiartem.com live inspection (fonts/section order confirmation)
-3. `git init` + queued milestone commits
-4. `npm run build` + dev server + dev-browser visual QA loop
-5. Lighthouse/60fps audit, Vercel deploy
+Remaining: dev-browser visual QA loop (in progress) → Lighthouse/60fps →
+opengraph-image → Vercel deploy.
 
 ## Status snapshot
 

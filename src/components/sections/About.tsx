@@ -43,7 +43,7 @@ export default function About() {
         <MaskLines
           as="h2"
           lines={[about.statement.split(",")[0] + ",", about.statement.split(",")[1]?.trim() ?? ""]}
-          className="text-display mt-14 max-w-[12ch]"
+          className="text-display mt-14"
           lineClassName="text-[length:var(--text-display-lg)]"
         />
 

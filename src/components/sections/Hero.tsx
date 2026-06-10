@@ -57,7 +57,7 @@ export default function Hero() {
           lineClassName="text-[length:var(--text-display-xl)]"
         />
 
-        <Reveal delay={0.25} className="mt-6 max-w-[44rem]">
+        <Reveal delay={0.25} className="mt-6 max-w-[52rem]">
           <p className="text-lg leading-relaxed text-ink-65 sm:text-xl">
             {hero.subline}
           </p>

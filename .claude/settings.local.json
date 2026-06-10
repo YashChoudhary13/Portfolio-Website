@@ -12,7 +12,8 @@
       "PowerShell(New-Item *)",
       "PowerShell(node \"Z:\\\\Projects\\\\Projects\\\\Portfolio Website\\\\scripts\\\\extract-frames.mjs\" \"C:\\\\Users\\\\choud\\\\.claude\\\\uploads\\\\d1b32a51-c352-437b-88b3-ddcce9959bc6\\\\ade422a4-661080874b6a4cbd9de3576011f50bc3.mp4\" \"$env:TEMP\\\\ffx\\\\frames\" 1; \\(Get-ChildItem \"$env:TEMP\\\\ffx\\\\frames\"\\).Count)",
       "PowerShell(node \"Z:\\\\Projects\\\\Projects\\\\Portfolio Website\\\\scripts\\\\extract-frames.mjs\" \"C:\\\\Users\\\\choud\\\\.claude\\\\uploads\\\\d1b32a51-c352-437b-88b3-ddcce9959bc6\\\\ade422a4-661080874b6a4cbd9de3576011f50bc3.mp4\" \"$env:TEMP\\\\ffx\\\\knob\" 8 8.5 6; \\(Get-ChildItem \"$env:TEMP\\\\ffx\\\\knob\"\\).Count)",
-      "PowerShell(Remove-Item *)"
+      "PowerShell(Remove-Item *)",
+      "PowerShell(dev-browser *)"
     ]
   }
 }

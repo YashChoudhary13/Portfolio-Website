@@ -25,15 +25,14 @@
 - [x] M7 About: outlined watermark parallax, editorial split
 - [x] M8 Contact/Footer: display-xl CTA, magnetic email pill, live IST clock
 
-## Milestone 9 — Verification & polish (BLOCKED on classifier recovery)
+## Milestone 9 — Verification & polish (IN PROGRESS — blocker cleared)
 
-Queued, in order, single probe at session boundaries — no retry loops:
-
-- [ ] `npm run build` — fix any type/compile errors
-- [ ] git init + initial commit (then per-milestone commits going forward)
-- [ ] Frame-by-frame recording study → tune verification-queue constants
-- [ ] Dev server + dev-browser: per-section visual QA vs reference, in
-      milestone order (spacing/motion/type refinement until match)
+- [x] `npm run build` passing (fix: src/types/globals.d.ts for css imports)
+- [x] git init + commits 74253e0, 63e8f99
+- [x] Frame-by-frame recording study → verification queue resolved
+- [x] Reference-matched refinement pass (typography/nav/hero/metrics/knob/
+      projects/contact)
+- [ ] Dev server + dev-browser: per-section visual QA, in milestone order
 - [ ] Lighthouse ≥ 90 + 60fps trace; bundle check (three.js stays lazy)
 - [ ] opengraph-image.tsx
 - [ ] Vercel deploy
