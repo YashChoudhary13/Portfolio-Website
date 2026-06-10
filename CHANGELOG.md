@@ -2,6 +2,22 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-06-11 — Milestone 9 complete: QA-verified, Lighthouse-passing
+
+- Visual QA loop via dev-browser (scripts/qa-*.js): all sections verified
+  at 1440×900 and 390×844, knob detent interaction verified by click test
+- Knob rendering root-caused and fixed: lathe normals broke env reflection
+  → primitives rebuild (cylinder cap + rings); procedural equirect studio
+  as scene.environment; radial UV-space anisotropyMap → starburst; physical
+  light units; exposure tuned (envMapIntensity 0.8, key 22cd +30 hover)
+- Fixes from QA: TickRing SSR float-drift hydration mismatch (rounded
+  coords), About 12ch-container collapse, hero subline orphan, mobile
+  sticker/headline collision, missing *.css TS declaration
+- Added opengraph-image.tsx (1200×630), metadataBase (env-derived), favicon
+- Lighthouse (prod, headless chromium): Perf 90 · A11y 95 · BP 100 ·
+  SEO 100 · CLS 0 · TBT 140ms · LCP 3.3s (throttled lab)
+- Commits: 74253e0 → 63e8f99 → 6c64a83 → (this)
+
 ## 2026-06-11 — Phase 0 deliverables + Milestones 0–8 code-complete
 
 - docs/DESIGN_ANALYSIS.md: all five analysis deliverables (design analysis,

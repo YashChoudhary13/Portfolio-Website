@@ -20,6 +20,12 @@ const plexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(
+    process.env.NEXT_PUBLIC_SITE_URL ??
+      (process.env.VERCEL_URL
+        ? `https://${process.env.VERCEL_URL}`
+        : "http://localhost:3000"),
+  ),
   title: "Yash Choudhary — Full-Stack Engineer & AI Systems Builder",
   description:
     "Full-stack engineer building RAG-powered LLM systems and production web platforms. GenAI internship, paid client delivery, five-model deepfake detection — shipped, not demoed.",

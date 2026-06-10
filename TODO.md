@@ -1,44 +1,35 @@
 # TODO
 
-## Phase 0 — Reference analysis ✓ (with deferred verification)
+## All milestones complete ✓
 
-- [x] Parse resume → docs/CONTENT_MAP.md
-- [x] Deliverables 1–5 → docs/DESIGN_ANALYSIS.md
-- [ ] **DEFERRED (tooling outage):** extract frames from recording + inspect
-      hiartem.com live → resolve verification queue (DESIGN_ANALYSIS §0)
+- [x] Phase 0 — reference analysis (5 deliverables + frame-by-frame
+      recording study; DESIGN_ANALYSIS.md §0 fully resolved)
+- [x] M0 Foundation — tokens, Inter+Plex Mono, Lenis+GSAP ticker, nav bar,
+      grain, motion/content libraries
+- [x] M1 Hero — one-line name, gray subline, 3 tilted tilt-panels w/ header
+      strips + mini-compositions (pills / flow / deploy board)
+- [x] M2 Metrics — columned hairline rhythm, count-up numbers
+- [x] M3 Knob ★ — spun-aluminum starburst (primitives + radial anisotropy +
+      procedural studio env), diagonal detents, drag inertia + snap,
+      accordion sync, keyboard + ARIA, lazy chunk, view-gated frameloop
+- [x] M4 Projects — DeepVerify console + REVO browser mock, editorial
+      case studies w/ header-strip frames
+- [x] M5 Architecture — scroll-drawn SVG paths, SMIL pulses, mobile flow
+- [x] M6 Experience — scroll-grown spine, CURRENT pulse
+- [x] M7 About — watermark parallax, editorial split
+- [x] M8 Contact — centered display CTA, tilted Say hi! sticker, IST clock
+- [x] M9 Verification — hydration clean, console clean, desktop+mobile
+      visual QA, Lighthouse 90/95/100/100 CLS 0, OG image, metadataBase
 
-## Milestones 0–8 — Code complete ✓ (visual QA pending)
+## Awaiting user decision
 
-- [x] M0 Foundation: tokens, fonts, Lenis+GSAP ticker, glass nav (hide/show,
-      magnetic links, mobile overlay), grain, motion.ts, content.ts
-- [x] M1 Hero: mask-line display block, 3 tilt cards (sheen, counter-shadow,
-      desynced float), scrub exit, scroll cue
-- [x] M2 Metrics: hairline ledger, count-up once, hover accent underline
-- [x] M3 Knob ★: lathe aluminum + anisotropy maps, Lightformer studio,
-      cursor key light, click/drag/keyboard detents w/ momentum, state panel,
-      lazy R3F chunk, frameloop view-gating
-- [x] M4 Projects: DeepVerify console SVG + REVO browser mock, editorial
-      alternating case studies
-- [x] M5 Architecture: scroll-drawn paths, SMIL data pulses, node grid,
-      mobile vertical flow
-- [x] M6 Experience: scroll-grown spine, reveals, CURRENT pulse
-- [x] M7 About: outlined watermark parallax, editorial split
-- [x] M8 Contact/Footer: display-xl CTA, magnetic email pill, live IST clock
+- [ ] Vercel deployment (everything ready; needs explicit go-ahead)
+- [ ] Set NEXT_PUBLIC_SITE_URL once domain exists
 
-## Milestone 9 — Verification & polish (IN PROGRESS — blocker cleared)
+## Optional polish backlog (post-launch candidates)
 
-- [x] `npm run build` passing (fix: src/types/globals.d.ts for css imports)
-- [x] git init + commits 74253e0, 63e8f99
-- [x] Frame-by-frame recording study → verification queue resolved
-- [x] Reference-matched refinement pass (typography/nav/hero/metrics/knob/
-      projects/contact)
-- [ ] Dev server + dev-browser: per-section visual QA, in milestone order
-- [ ] Lighthouse ≥ 90 + 60fps trace; bundle check (three.js stays lazy)
-- [ ] opengraph-image.tsx
-- [ ] Vercel deploy
-
-## Known self-review items (fixed during pass)
-
-- [x] Reveal delay was dead (variant transition precedence) → custom prop
-- [x] motion.create() in render → useMemo
-- [x] Architecture hooks-in-map → FlowPath component
+- [ ] Scroll-spy active state in nav (reference has underline on current page)
+- [ ] Knob: faint machined micro-rings on face (second groove at r 0.45)
+- [ ] Preloader beat (wordmark fade) — reference has none visible; skip unless asked
+- [ ] PageSpeed field-data pass after deploy (LCP 3.3s lab → check real devices)
+- [ ] prefers-reduced-motion full sweep verification

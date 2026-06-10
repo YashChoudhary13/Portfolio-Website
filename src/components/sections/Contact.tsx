@@ -52,7 +52,7 @@ export default function Contact() {
           />
 
           {/* tilted sticker CTA, overlapping the headline's baseline */}
-          <Magnetic strength={12} className="-mt-4 sm:-mt-8">
+          <Magnetic strength={12} className="mt-4 sm:-mt-8">
             <motion.a
               href={`mailto:${identity.email}`}
               aria-label={`Email ${identity.email}`}
