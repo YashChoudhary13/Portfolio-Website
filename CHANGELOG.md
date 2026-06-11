@@ -2,7 +2,34 @@
 
 All notable changes to this project. Newest first.
 
-## 2026-06-11 — Milestone 10: Projects expansion (/projects + case studies)
+## 2026-06-12 — Milestone 11: Refinement pass (nav fix, light band, human hero)
+
+- FIXED cross-route anchor navigation: hash targets now hand off through
+  lib/anchor.ts to an AnchorScroll component mounted on the homepage —
+  the scroll fires only after the homepage has mounted (no timers, no
+  race). Verified: /projects → About/Experience lands the section at
+  exactly the 96px nav offset. Deep links (/#about) honored; SmoothScroll
+  skips its top-reset when a hash is present.
+- Homepage restructure: REMOVED the Proof/metrics section (unverified-
+  feeling numbers) and the Selected-work section (now lives only at
+  /projects). New order: Hero → 01 Capabilities → 02 How I build →
+  03 Experience → 04 About → 05 Contact. Nav: Projects · Experience ·
+  About · Contact (ids #capabilities/#experience added).
+- Visual balance: Experience + About now sit in a .theme-light "paper"
+  band — a scoped CSS-var override (ink/hairline/base flipped, accent
+  deepened to #087f5b for contrast) inside a rounded sheet; raw
+  white-alpha utilities in those sections swapped to token-based ones;
+  About watermark stroke now var(--stroke-faint).
+- Hero cards rebuilt with human content: What I build (→ #capabilities),
+  Current focus (→ /projects), Life off screen (→ #about). Whole card is
+  the link (hash scrolls via Lenis, route via next/link); hover adds
+  lift/scale, border brighten, arrow reveal, and a footer CTA strip
+  naming the destination. Tilt/sheen/float interactions retained.
+- Nav socials: GH/IN/LC text replaced with Simple Icons SVGs (GitHub,
+  LinkedIn, LeetCode) in currentColor, desktop + mobile overlay.
+- How I build: viewBox cropped (0 40 1200 412) to kill dead space, tech
+  captions resized to fit their boxes, Backend selected by default so the
+  internals panel is never an empty reservation.
 
 - New route /projects: editorial archive index — display-type rows, status/
   live chips, cursor-trailing preview panel (project visual + key metric),

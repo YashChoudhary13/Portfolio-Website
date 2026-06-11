@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
 import {
@@ -11,23 +11,19 @@ import {
 } from "framer-motion";
 import { useLenis } from "@/components/providers/SmoothScroll";
 import Magnetic from "@/components/shared/Magnetic";
-import SlideSwapLink from "@/components/shared/SlideSwapLink";
+import SocialIcon from "@/components/shared/SocialIcon";
 import { durations, EASE_OUT_EXPO } from "@/lib/motion";
+import { setPendingAnchor } from "@/lib/anchor";
 import { identity, nav, socials } from "@/lib/content";
-
-const SOCIAL_SHORT: Record<string, string> = {
-  GitHub: "GH",
-  LinkedIn: "IN",
-  LeetCode: "LC",
-};
 
 /**
  * Floating bar matched to reference anatomy: logo + links in the left
  * cluster, "Say hi!" + socials on the right. Hides on scroll-down past the
  * first beat, returns on scroll-up.
  *
- * Route-aware: hash targets smooth-scroll on the homepage and defer through
- * a navigation back to "/" from any other route; "/projects" is a real route.
+ * Route-aware: hash targets smooth-scroll on the homepage; from any other
+ * route they hand the target to AnchorScroll (lib/anchor) and navigate to
+ * "/" — the homepage scrolls to the section once it has actually mounted.
  */
 export default function Nav() {
   const lenis = useLenis();
@@ -36,33 +32,20 @@ export default function Nav() {
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
-  const pendingHash = useRef<string | null>(null);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = scrollY.getPrevious() ?? 0;
     setHidden(latest > prev && latest > 120 && !open);
   });
 
-  // arriving home with a deferred hash target: scroll once the page settles
-  useEffect(() => {
-    if (pathname !== "/" || !pendingHash.current) return;
-    const target = pendingHash.current;
-    pendingHash.current = null;
-    const id = setTimeout(() => {
-      lenis?.scrollTo(target, { offset: -96, duration: 1.3 });
-    }, 250);
-    return () => clearTimeout(id);
-  }, [pathname, lenis]);
-
   const go = (target: string | number) => {
     setOpen(false);
     lenis?.start();
     if (typeof target === "string" && target.startsWith("#") && pathname !== "/") {
-      pendingHash.current = target;
+      setPendingAnchor(target);
       router.push("/");
       return;
     }
-    pendingHash.current = null; // a direct scroll supersedes any deferred one
     lenis?.scrollTo(target, { offset: -96, duration: 1.3 });
   };
 
@@ -159,7 +142,7 @@ export default function Nav() {
 
             <span aria-hidden className="hidden h-5 w-px bg-white/10 md:block" />
 
-            <div className="hidden items-center gap-1 md:flex">
+            <div className="hidden items-center gap-0.5 md:flex">
               {socials.map((social) => (
                 <Magnetic key={social.label} strength={5}>
                   <a
@@ -167,9 +150,12 @@ export default function Nav() {
                     target="_blank"
                     rel="noreferrer"
                     aria-label={social.label}
-                    className="block rounded-lg px-2.5 py-2 font-mono text-[11px] tracking-[0.1em] text-ink-40 transition-colors duration-300 hover:text-ink"
+                    className="group block rounded-lg p-2.5 text-ink-40 transition-colors duration-300 hover:text-ink"
                   >
-                    {SOCIAL_SHORT[social.label]}
+                    <SocialIcon
+                      name={social.label}
+                      className="size-[17px] transition-transform duration-500 ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-110"
+                    />
                   </a>
                 </Magnetic>
               ))}
@@ -247,16 +233,18 @@ export default function Nav() {
               <p className="font-mono text-xs uppercase tracking-[0.18em] text-ink-40">
                 {identity.location} · {identity.timezone}
               </p>
-              <div className="flex gap-4">
+              <div className="flex gap-2">
                 {socials.map((social) => (
-                  <SlideSwapLink
+                  <a
                     key={social.label}
                     href={social.href}
                     target="_blank"
                     rel="noreferrer"
-                    className="font-mono text-[11px] tracking-[0.1em] text-ink-65"
-                    label={SOCIAL_SHORT[social.label]}
-                  />
+                    aria-label={social.label}
+                    className="block rounded-lg p-2 text-ink-65 transition-colors duration-300 hover:text-ink"
+                  >
+                    <SocialIcon name={social.label} className="size-5" />
+                  </a>
                 ))}
               </div>
             </div>

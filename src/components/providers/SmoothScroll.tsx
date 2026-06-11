@@ -29,7 +29,9 @@ export default function SmoothScroll({ children }: { children: ReactNode }) {
 
   // Route changes land at the top, immediately — Lenis would otherwise
   // fight Next's own scroll reset and ease back from the old position.
+  // Hash deep links are exempt: AnchorScroll owns that scroll.
   useEffect(() => {
+    if (window.location.hash) return;
     lenis?.scrollTo(0, { immediate: true, force: true });
   }, [pathname, lenis]);
 

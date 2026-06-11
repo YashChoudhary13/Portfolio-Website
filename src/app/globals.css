@@ -31,6 +31,11 @@
 
 /* ------ base ------ */
 
+:root {
+  /* faint outline stroke for watermark type — re-themed in light scope */
+  --stroke-faint: rgba(255, 255, 255, 0.06);
+}
+
 html {
   background: var(--color-base);
   color-scheme: dark;
@@ -122,6 +127,32 @@ html.lenis body {
 /* hairline divider */
 @utility hairline {
   border-color: var(--color-hairline);
+}
+
+/* ------ light editorial band ------
+   Scoped re-theme: every token-driven utility (text-ink*, hairline,
+   bg-base/raised, accent) flips with the variables — sections keep their
+   markup and motion, only the mood changes. Accent deepens for contrast
+   on paper. */
+.theme-light {
+  --color-base: #f0eee9; /* matches the band gradient — bg-base masks blend in */
+  --color-raised: #f6f5f1;
+  --color-ink: #16161a;
+  --color-ink-65: rgba(22, 22, 26, 0.7);
+  --color-ink-40: rgba(22, 22, 26, 0.56); /* lifted for AA on paper */
+  --color-ink-25: rgba(22, 22, 26, 0.3);
+  --color-hairline: rgba(22, 22, 26, 0.12);
+  --color-glass: rgba(22, 22, 26, 0.04);
+  --color-accent: #087f5b;
+  --color-accent-dim: rgba(8, 127, 91, 0.4);
+  --stroke-faint: rgba(22, 22, 26, 0.09);
+  background: linear-gradient(180deg, #f4f2ed 0%, #eae8e2 100%);
+  color: var(--color-ink);
+}
+
+.theme-light ::selection {
+  background: #087f5b;
+  color: #f4f2ed;
 }
 
 @media (prefers-reduced-motion: reduce) {

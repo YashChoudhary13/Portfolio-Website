@@ -20,13 +20,18 @@ must trace back to a line here. No invented metrics.
 - Paid client delivery shipped to production (The MEX Restaurant, Ireland)
 - Full-stack: React/Next.js/TypeScript/Node/PostgreSQL/FastAPI
 
-## Hero floating cards
+## Hero floating cards (2026-06 refinement — human over buzzwords; whole card navigates)
 
-1. **AI Engineering** — RAG · LLM pipelines · PyTorch
-2. **Full Stack Systems** — Next.js · Node · PostgreSQL
-3. **Production Deployments** — Docker · CI/CD · Paid client work
+1. **What I build** → scrolls to #capabilities — pills: AI systems · Full-stack products · Automation tools
+2. **Current focus** → /projects — rows: Building products (NOW) · Shipping real systems (ALWAYS) · Exploring AI workflows (DAILY)
+3. **Life off screen** → scrolls to #about — chips: Travel · Fitness · Photography · Coffee · Learning
+   (personal interests supplied by Yash in the refinement spec, 2026-06-12)
 
 ## Metrics (verbatim from resume)
+
+> 2026-06 refinement: the homepage "Proof" metrics section was REMOVED at
+> Yash's request (unverified-feeling numbers reduce credibility). These
+> figures now appear only inside the /projects case studies, in context.
 
 | Metric | Source |
 | --- | --- |
@@ -45,6 +50,12 @@ must trace back to a line here. No invented metrics.
 2. **Full Stack** — React, Next.js, TypeScript, Node/Express, FastAPI, PostgreSQL, Redis, Drizzle ORM, WebSockets, JWT/RBAC
 3. **Production Systems** — Docker, GitHub Actions, Nginx, Vercel, Railway, Render; paid client delivery; privacy-compliant data handling
 4. **Featured Projects** — DeepVerify + REVO teasers linking to case studies
+
+> 2026-06 refinement: the homepage "Selected work" section was removed —
+> projects live exclusively at /projects (archive) and /projects/[slug]
+> (case studies). Homepage structure is now: Hero → Capabilities →
+> How I build → Experience → About → Contact (01–05), with Experience +
+> About presented as a light editorial band.
 
 ## Case study 1 — DeepVerify (Dec 2025)
 

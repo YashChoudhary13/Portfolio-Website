@@ -19,8 +19,8 @@ export const socials = [
 ] as const;
 
 export const nav = [
-  { label: "Work", target: "#work" },
   { label: "Projects", target: "/projects" },
+  { label: "Experience", target: "#experience" },
   { label: "About", target: "#about" },
   { label: "Contact", target: "#contact" },
 ] as const;
@@ -31,46 +31,28 @@ export const hero = {
   name: "Yash Choudhary",
   subline:
     "Full-stack engineer & AI systems builder — building RAG-powered LLM workflows at a GenAI internship and shipping production platforms clients pay for.",
+  /** whole card navigates; hash targets scroll, routes push */
   cards: [
-    { index: "01", title: "AI Engineering" },
-    { index: "02", title: "Full Stack Systems" },
-    { index: "03", title: "Production Deployments" },
+    {
+      index: "01",
+      title: "What I build",
+      href: "#capabilities",
+      cta: "See the capabilities",
+    },
+    {
+      index: "02",
+      title: "Current focus",
+      href: "/projects",
+      cta: "Open the projects",
+    },
+    {
+      index: "03",
+      title: "Life off screen",
+      href: "#about",
+      cta: "More about me",
+    },
   ],
 } as const;
-
-export const metrics = [
-  {
-    value: 40,
-    suffix: "K",
-    label: "Images processed",
-    source: "DeepVerify — custom CNN training set",
-  },
-  {
-    value: 5,
-    suffix: "",
-    label: "Model ensemble",
-    source: "DeepVerify — EfficientNet · ResNet · Xception · MobileNet · CNN",
-  },
-  {
-    value: 70,
-    suffix: "%",
-    label: "API calls eliminated",
-    source: "REVO — caching layer",
-  },
-  {
-    value: 60,
-    suffix: "%",
-    label: "Faster order confirmation",
-    source: "The MEX — WebSocket pipeline",
-  },
-  {
-    value: 1.8,
-    suffix: "s",
-    decimals: 1,
-    label: "Average detection time",
-    source: "DeepVerify — async FastAPI + Redis",
-  },
-] as const;
 
 export const knobStates = [
   {
@@ -94,49 +76,8 @@ export const knobStates = [
   {
     label: "Projects",
     title: "Featured Projects",
-    body: "DeepVerify, a five-model deepfake detection platform with 1.8s verdicts. REVO, a Chrome extension that reads a GitHub repo in 30 seconds instead of 10 minutes.",
+    body: "DeepVerify's five-model detection pipeline, REVO's thirty-second repository analyzer, The MEX's real-time order platform — each has a full case study on the Projects page.",
     chips: ["DeepVerify", "REVO", "The MEX"],
-  },
-] as const;
-
-export const projects = [
-  {
-    id: "deepverify",
-    index: "01",
-    name: "DeepVerify",
-    tagline: "Multi-model deepfake detection",
-    category: "ML systems / Computer vision",
-    date: "Dec 2025",
-    problem: "Single-model detectors misfire on synthetic imagery — too many false positives to trust in production.",
-    architecture: "Next.js front end → async FastAPI inference API → Redis queue → five-model PyTorch ensemble → Dockerized deployment.",
-    results: [
-      { value: "40K", label: "balanced training images" },
-      { value: "−12%", label: "false positives vs single model" },
-      { value: "1.8s", label: "average detection time" },
-    ],
-    stack: ["Next.js", "FastAPI", "PyTorch", "Redis", "Docker"],
-    links: [
-      { label: "GitHub", href: "https://github.com/yashchoudhary13" },
-    ],
-  },
-  {
-    id: "revo",
-    index: "02",
-    name: "REVO",
-    tagline: "GitHub repository analyzer — Chrome extension",
-    category: "Developer tools / Browser extension",
-    date: "Oct 2025",
-    problem: "Evaluating an unfamiliar repository costs ten minutes of manual reading before you know if it's worth your time.",
-    architecture: "Manifest V3 extension injecting a React UI into GitHub pages → GitHub REST API behind a caching layer → structured JSON exports for LLM summarization.",
-    results: [
-      { value: "70%", label: "fewer API calls" },
-      { value: "30s", label: "analysis, down from 10 min" },
-      { value: "JSON", label: "LLM-ready structured exports" },
-    ],
-    stack: ["React", "Vite", "Manifest V3", "GitHub REST API"],
-    links: [
-      { label: "GitHub", href: "https://github.com/yashchoudhary13" },
-    ],
   },
 ] as const;
 

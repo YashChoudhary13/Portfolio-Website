@@ -201,12 +201,13 @@ export default function KnobSection() {
   return (
     <section
       ref={sectionRef}
+      id="capabilities"
       className="border-y hairline bg-raised"
       aria-label="Capabilities — interactive control"
     >
       <div className="container-x py-[clamp(6rem,14vh,12.5rem)]">
         <Eyebrow right="Click or drag — it's a real knob">
-          02 — Capabilities
+          01 — Capabilities
         </Eyebrow>
 
         <MaskLines

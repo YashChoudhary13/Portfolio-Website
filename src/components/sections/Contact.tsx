@@ -40,7 +40,7 @@ export default function Contact() {
             ) : undefined
           }
         >
-          07 — Contact
+          05 — Contact
         </Eyebrow>
 
         <div className="mt-20 flex flex-col items-center text-center">

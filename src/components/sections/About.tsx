@@ -30,7 +30,7 @@ export default function About() {
         aria-hidden
         style={{
           y: watermarkY,
-          WebkitTextStroke: "1.5px rgba(255,255,255,0.06)",
+          WebkitTextStroke: "1.5px var(--stroke-faint)",
         }}
         className="text-display pointer-events-none absolute -right-[4%] top-[6%] select-none text-[38vw] leading-none text-transparent"
       >
@@ -38,7 +38,7 @@ export default function About() {
       </motion.span>
 
       <div className="container-x relative py-[clamp(6rem,14vh,12.5rem)]">
-        <Eyebrow right="JECRC University · 2022 — 2026">06 — About</Eyebrow>
+        <Eyebrow right="JECRC University · 2022 — 2026">04 — About</Eyebrow>
 
         <MaskLines
           as="h2"

@@ -6,11 +6,16 @@
 
 ## Current phase
 
-**Milestones 0–10 COMPLETE.** M10 added the Projects expansion: /projects
-archive index + /projects/[slug] case studies (deepverify · revo · themex)
-and the explorable homepage workflow diagram. Build-clean, visually QA'd.
-**Awaiting user go-ahead for Vercel deployment** (external action — not
-taken unilaterally).
+**Milestones 0–11 COMPLETE.** M10 added the Projects expansion (/projects
+archive + case studies + explorable workflow diagram). M11 was the
+refinement pass: reliable cross-route anchor nav (lib/anchor.ts +
+AnchorScroll), homepage slimmed to Hero → Capabilities → How I build →
+Experience → About → Contact (Proof + Selected-work sections removed),
+the Experience+About light "paper" band (.theme-light scoped var
+override), human hero cards that navigate, SVG social icons, diagram
+spacing/overflow fixes with Backend selected by default. Build-clean,
+visually QA'd. **Awaiting user go-ahead for Vercel deployment** (external
+action — not taken unilaterally).
 
 ## Verified quality gates
 
@@ -35,10 +40,18 @@ taken unilaterally).
   ProjectsIndex (cursor preview), detail/* (ProjectHero, LivePanel inline+
   floating pill, SystemFlow, ArchStack, MetricsBand, Gallery frame kinds
   board/bars/log/json, NextProject, ProjectDetail composition)
-- Nav is route-aware: hash targets lenis-scroll on "/", elsewhere defer via
-  pendingHash → router.push("/") → delayed scrollTo; SmoothScroll resets
-  Lenis to top on pathname change; template.tsx = opacity-only route fade
-  (transforms would break fixed-position children)
+- Nav is route-aware: hash targets lenis-scroll on "/"; from other routes
+  the target goes through lib/anchor.ts (module store) and AnchorScroll —
+  mounted ONLY on the homepage — consumes it after mount + 2 rAFs (also
+  honors /#hash deep links). SmoothScroll resets Lenis to top on pathname
+  change EXCEPT when a hash is present. template.tsx = opacity-only route
+  fade (transforms would break fixed-position children)
+- Homepage M11: sections numbered 01–05 (Capabilities #capabilities, How I
+  build, Experience #experience, About #about, Contact #contact); Proof +
+  Selected-work sections deleted (content.ts no longer exports metrics/
+  projects). Experience+About wrapped in .theme-light (globals.css):
+  scoped CSS-var override — keep raw white-alpha utilities OUT of those
+  two sections, use token utilities (bg-ink-25 etc.) so both themes work
 - Live-product links: caseStudies[slug].live.href — currently GitHub profile /
   mailto placeholders-of-record; swap to real product URLs when they exist
 - Motion constants ONLY in src/lib/motion.ts (springs: gentle/responsive/snap;

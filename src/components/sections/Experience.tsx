@@ -20,10 +20,11 @@ export default function Experience() {
   return (
     <section
       ref={ref}
+      id="experience"
       className="container-x py-[clamp(6rem,14vh,12.5rem)]"
       aria-label="Experience"
     >
-      <Eyebrow right="2025 — present">05 — Experience</Eyebrow>
+      <Eyebrow right="2025 — present">03 — Experience</Eyebrow>
 
       <div className="relative mt-6">
         {/* spine track + scroll-grown progress */}
@@ -44,7 +45,7 @@ export default function Experience() {
                   <span className="size-[7px] rounded-full bg-accent" />
                 </>
               ) : (
-                <span className="size-[5px] rounded-full bg-white/30" />
+                <span className="size-[5px] rounded-full bg-ink-25" />
               )}
             </span>
 
@@ -75,7 +76,7 @@ export default function Experience() {
                 <ul className="mt-6 max-w-[44rem] space-y-3">
                   {entry.points.map((point) => (
                     <li key={point} className="flex gap-4 leading-relaxed text-ink-65">
-                      <span aria-hidden className="mt-[0.85em] h-px w-5 shrink-0 bg-white/25" />
+                      <span aria-hidden className="mt-[0.85em] h-px w-5 shrink-0 bg-ink-25" />
                       {point}
                     </li>
                   ))}

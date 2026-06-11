@@ -24,6 +24,11 @@
       status chips), /projects/[slug] case studies ×3 (SystemFlow, ArchStack,
       LivePanel, Gallery, MetricsBand, learnings, next-case), route-aware nav
       + Projects item, explorable homepage workflow diagram, TheMexVisual
+- [x] M11 Refinement — cross-route anchor nav fixed (lib/anchor +
+      AnchorScroll), Proof + Selected-work sections removed, sections
+      renumbered 01–05, Experience+About light paper band (.theme-light),
+      human hero cards w/ full-card navigation, SVG social icons, How-I-build
+      viewBox crop + caption fit + default-active Backend
 
 ## Awaiting user decision
 

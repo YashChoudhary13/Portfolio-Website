@@ -177,7 +177,9 @@ export default function Architecture() {
     target: ref,
     offset: ["start 75%", "center 40%"],
   });
-  const [active, setActive] = useState<string | null>(null);
+  // backend starts selected — the panel is never an empty reservation and
+  // the diagram announces that it can be explored
+  const [active, setActive] = useState<string | null>("backend");
 
   const activeNode = architecture.nodes.find((n) => n.id === active) ?? null;
   const litPaths = new Set(
@@ -196,18 +198,18 @@ export default function Architecture() {
       className="container-x py-[clamp(6rem,14vh,12.5rem)]"
       aria-label="How I build"
     >
-      <Eyebrow right="One system, end to end">04 — How I build</Eyebrow>
+      <Eyebrow right="One system, end to end">02 — How I build</Eyebrow>
 
       {/* desktop diagram */}
       <div className="mt-14 hidden md:block">
-        <svg viewBox="0 0 1200 520" className="w-full" role="img" aria-label="System architecture: frontend through backend to database and AI layer, shipped via deployment. Select a layer to see its internals.">
+        <svg viewBox="0 40 1200 412" className="w-full" role="img" aria-label="System architecture: frontend through backend to database and AI layer, shipped via deployment. Select a layer to see its internals.">
           {/* dotted field */}
           <defs>
             <pattern id="arch-dots" width="28" height="28" patternUnits="userSpaceOnUse">
               <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.05)" />
             </pattern>
           </defs>
-          <rect width="1200" height="520" fill="url(#arch-dots)" />
+          <rect y="40" width="1200" height="412" fill="url(#arch-dots)" />
 
           {/* connections — drawn by scroll */}
           {PATHS.map((p) => (
@@ -279,8 +281,8 @@ export default function Architecture() {
                     x={pos.x + 20}
                     y={pos.y + 58}
                     fill="rgba(255,255,255,0.4)"
-                    fontSize={9.5}
-                    letterSpacing={1.4}
+                    fontSize={8.5}
+                    letterSpacing={0.6}
                     style={{ fontFamily: "var(--font-plex-mono)" }}
                   >
                     {node.tech.join(" · ").toUpperCase()}
@@ -303,7 +305,7 @@ export default function Architecture() {
         </svg>
 
         {/* internals panel */}
-        <div className="min-h-[11rem]">
+        <div className="mt-2 min-h-[10rem]">
           <AnimatePresence mode="wait" initial={false}>
             {activeNode ? (
               <motion.div
