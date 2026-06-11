@@ -1,6 +1,8 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import { usePathname, useRouter } from "next/navigation";
 import {
   AnimatePresence,
   motion,
@@ -23,22 +25,52 @@ const SOCIAL_SHORT: Record<string, string> = {
  * Floating bar matched to reference anatomy: logo + links in the left
  * cluster, "Say hi!" + socials on the right. Hides on scroll-down past the
  * first beat, returns on scroll-up.
+ *
+ * Route-aware: hash targets smooth-scroll on the homepage and defer through
+ * a navigation back to "/" from any other route; "/projects" is a real route.
  */
 export default function Nav() {
   const lenis = useLenis();
+  const pathname = usePathname();
+  const router = useRouter();
   const { scrollY } = useScroll();
   const [hidden, setHidden] = useState(false);
   const [open, setOpen] = useState(false);
+  const pendingHash = useRef<string | null>(null);
 
   useMotionValueEvent(scrollY, "change", (latest) => {
     const prev = scrollY.getPrevious() ?? 0;
     setHidden(latest > prev && latest > 120 && !open);
   });
 
+  // arriving home with a deferred hash target: scroll once the page settles
+  useEffect(() => {
+    if (pathname !== "/" || !pendingHash.current) return;
+    const target = pendingHash.current;
+    pendingHash.current = null;
+    const id = setTimeout(() => {
+      lenis?.scrollTo(target, { offset: -96, duration: 1.3 });
+    }, 250);
+    return () => clearTimeout(id);
+  }, [pathname, lenis]);
+
   const go = (target: string | number) => {
     setOpen(false);
     lenis?.start();
+    if (typeof target === "string" && target.startsWith("#") && pathname !== "/") {
+      pendingHash.current = target;
+      router.push("/");
+      return;
+    }
+    pendingHash.current = null; // a direct scroll supersedes any deferred one
     lenis?.scrollTo(target, { offset: -96, duration: 1.3 });
+  };
+
+  const goHome = () => {
+    setOpen(false);
+    lenis?.start();
+    if (pathname !== "/") router.push("/");
+    else lenis?.scrollTo(0, { duration: 1.3 });
   };
 
   const toggleMenu = () => {
@@ -49,6 +81,10 @@ export default function Nav() {
       return next;
     });
   };
+
+  const isRoute = (target: string) => target.startsWith("/");
+  const isActive = (target: string) =>
+    isRoute(target) && pathname.startsWith(target);
 
   return (
     <>
@@ -62,7 +98,7 @@ export default function Nav() {
           <div className="flex items-center gap-2 sm:gap-6">
             <button
               type="button"
-              onClick={() => go(0)}
+              onClick={goHome}
               aria-label="Back to top"
               className="flex size-8 items-center justify-center rounded-lg border hairline bg-white/[0.04] text-sm font-extrabold tracking-tight"
             >
@@ -71,16 +107,34 @@ export default function Nav() {
             <div className="hidden items-center gap-1 md:flex">
               {nav.map((item) => (
                 <Magnetic key={item.label} strength={5}>
-                  <a
-                    href={item.target}
-                    onClick={(e) => {
-                      e.preventDefault();
-                      go(item.target);
-                    }}
-                    className="block rounded-lg px-3.5 py-2 text-sm text-ink-65 transition-colors duration-300 hover:text-ink"
-                  >
-                    {item.label}
-                  </a>
+                  {isRoute(item.target) ? (
+                    <Link
+                      href={item.target}
+                      aria-current={isActive(item.target) ? "page" : undefined}
+                      className={`block rounded-lg px-3.5 py-2 text-sm transition-colors duration-300 hover:text-ink ${
+                        isActive(item.target) ? "text-ink" : "text-ink-65"
+                      }`}
+                    >
+                      {item.label}
+                      {isActive(item.target) && (
+                        <span
+                          aria-hidden
+                          className="ml-1.5 inline-block size-1 rounded-full bg-accent align-middle"
+                        />
+                      )}
+                    </Link>
+                  ) : (
+                    <a
+                      href={`/${item.target}`}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        go(item.target);
+                      }}
+                      className="block rounded-lg px-3.5 py-2 text-sm text-ink-65 transition-colors duration-300 hover:text-ink"
+                    >
+                      {item.label}
+                    </a>
+                  )}
                 </Magnetic>
               ))}
             </div>
@@ -158,10 +212,16 @@ export default function Nav() {
               {nav.map((item, i) => (
                 <span key={item.label} className="block overflow-hidden">
                   <motion.a
-                    href={item.target}
+                    href={isRoute(item.target) ? item.target : `/${item.target}`}
                     onClick={(e) => {
                       e.preventDefault();
-                      go(item.target);
+                      if (isRoute(item.target)) {
+                        setOpen(false);
+                        lenis?.start();
+                        router.push(item.target);
+                      } else {
+                        go(item.target);
+                      }
                     }}
                     className="text-display block text-5xl"
                     initial={{ y: "110%" }}
@@ -174,6 +234,11 @@ export default function Nav() {
                     }}
                   >
                     {item.label}
+                    {isActive(item.target) && (
+                      <span aria-hidden className="text-accent">
+                        .
+                      </span>
+                    )}
                   </motion.a>
                 </span>
               ))}

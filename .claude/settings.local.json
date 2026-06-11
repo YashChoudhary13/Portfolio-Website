@@ -15,7 +15,12 @@
       "PowerShell(Remove-Item *)",
       "PowerShell(dev-browser *)",
       "PowerShell(npm start *)",
-      "PowerShell(Get-ChildItem *)"
+      "PowerShell(Get-ChildItem *)",
+      "PowerShell(Invoke-WebRequest -Uri http://localhost:3000/projects -UseBasicParsing -TimeoutSec 30 | Select-Object -ExpandProperty StatusCode)",
+      "Bash(npm run *)",
+      "Bash(xargs grep -l \"JSON.parse\")",
+      "Bash(node -e \"console.log\\('Checking if animate-ping is a CSS animation...'\\)\")",
+      "Bash(npx tailwindcss *)"
     ]
   }
 }

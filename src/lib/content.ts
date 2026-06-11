@@ -20,6 +20,7 @@ export const socials = [
 
 export const nav = [
   { label: "Work", target: "#work" },
+  { label: "Projects", target: "/projects" },
   { label: "About", target: "#about" },
   { label: "Contact", target: "#contact" },
 ] as const;
@@ -140,12 +141,63 @@ export const projects = [
 ] as const;
 
 export const architecture = {
+  hint: "Select a layer to look inside — request paths, caches, pipelines.",
   nodes: [
-    { id: "frontend", label: "Frontend", tech: ["Next.js", "React", "Tailwind"] },
-    { id: "backend", label: "Backend", tech: ["Node.js", "Express", "FastAPI"] },
-    { id: "database", label: "Database", tech: ["PostgreSQL", "Redis", "Drizzle"] },
-    { id: "ai", label: "AI Layer", tech: ["RAG", "PyTorch", "LLM APIs"] },
-    { id: "deploy", label: "Deployment", tech: ["Docker", "Vercel", "Railway"] },
+    {
+      id: "frontend",
+      label: "Frontend",
+      tech: ["Next.js", "React", "Tailwind"],
+      detail: {
+        summary:
+          "Server-rendered React with motion treated as a first-class layer, not a decoration pass.",
+        flow: ["Route request", "RSC render", "Selective hydration", "Motion layer"],
+        facts: ["Next.js App Router", "React + TypeScript", "Tailwind CSS", "Framer Motion · GSAP"],
+      },
+    },
+    {
+      id: "backend",
+      label: "Backend",
+      tech: ["Node.js", "Express", "FastAPI"],
+      detail: {
+        summary:
+          "REST and realtime services with auth enforced at the boundary — every route knows who's asking before logic runs.",
+        flow: ["JWT verify", "RBAC gate", "Validation", "Service logic", "WebSocket fanout"],
+        facts: ["Node.js · Express", "FastAPI — async Python", "JWT · RBAC", "REST + WebSockets"],
+      },
+    },
+    {
+      id: "database",
+      label: "Database",
+      tech: ["PostgreSQL", "Redis", "Drizzle"],
+      detail: {
+        summary:
+          "Typed schema from the API down to the socket, with a cache in front of every hot path.",
+        flow: ["Drizzle schema", "Pooled queries", "Redis cache", "Invalidation"],
+        facts: ["PostgreSQL", "Redis — cache + queues", "Drizzle ORM — typed schema"],
+      },
+    },
+    {
+      id: "ai",
+      label: "AI Layer",
+      tech: ["RAG", "PyTorch", "LLM APIs"],
+      detail: {
+        summary:
+          "Retrieval-augmented pipelines tuned for answer accuracy per token — built daily at a GenAI internship.",
+        flow: ["Query", "Embed", "Retrieve", "Rerank", "Generate", "Validate"],
+        facts: ["RAG pipelines", "Function calling", "Structured outputs", "PyTorch"],
+      },
+    },
+    {
+      id: "deploy",
+      label: "Deployment",
+      tech: ["Docker", "Vercel", "Railway"],
+      detail: {
+        summary:
+          "Every push walks the same path to production — containerized, checked, and shipped the same way each time.",
+        flow: ["Push", "CI checks", "Docker build", "Deploy", "Health checks"],
+        facts: ["GitHub Actions", "Docker", "Nginx", "Vercel · Railway · Render"],
+      },
+    },
   ],
 } as const;
 

@@ -7,6 +7,7 @@ import {
   useState,
   type ReactNode,
 } from "react";
+import { usePathname } from "next/navigation";
 import Lenis from "lenis";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -24,6 +25,13 @@ export function useLenis() {
  */
 export default function SmoothScroll({ children }: { children: ReactNode }) {
   const [lenis, setLenis] = useState<Lenis | null>(null);
+  const pathname = usePathname();
+
+  // Route changes land at the top, immediately — Lenis would otherwise
+  // fight Next's own scroll reset and ease back from the old position.
+  useEffect(() => {
+    lenis?.scrollTo(0, { immediate: true, force: true });
+  }, [pathname, lenis]);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);

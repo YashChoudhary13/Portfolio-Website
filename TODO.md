@@ -20,11 +20,18 @@
 - [x] M8 Contact — centered display CTA, tilted Say hi! sticker, IST clock
 - [x] M9 Verification — hydration clean, console clean, desktop+mobile
       visual QA, Lighthouse 90/95/100/100 CLS 0, OG image, metadataBase
+- [x] M10 Projects expansion — /projects editorial archive (cursor preview,
+      status chips), /projects/[slug] case studies ×3 (SystemFlow, ArchStack,
+      LivePanel, Gallery, MetricsBand, learnings, next-case), route-aware nav
+      + Projects item, explorable homepage workflow diagram, TheMexVisual
 
 ## Awaiting user decision
 
 - [ ] Vercel deployment (everything ready; needs explicit go-ahead)
 - [ ] Set NEXT_PUBLIC_SITE_URL once domain exists
+- [ ] Real live-product URLs for case studies (caseStudies.ts → live.href;
+      currently GitHub profile / mailto stand-ins — swap when deepverify/
+      revo have public deployments)
 
 ## Optional polish backlog (post-launch candidates)
 

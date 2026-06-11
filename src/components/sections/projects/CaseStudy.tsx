@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion } from "framer-motion";
 import { MaskLines, Reveal } from "@/components/shared/Reveal";
 import SlideSwapLink from "@/components/shared/SlideSwapLink";
@@ -27,33 +28,37 @@ export default function CaseStudy({
 
   return (
     <article className="grid items-start gap-10 lg:grid-cols-12 lg:gap-14">
-      {/* hero visual — header strip + footer meta, like the reference cards */}
+      {/* hero visual — header strip + footer meta, opens the full case study */}
       <motion.div
-        className={`group relative overflow-hidden rounded-2xl border hairline bg-raised lg:col-span-7 ${
-          flip ? "lg:order-2" : ""
-        }`}
+        className={`lg:col-span-7 ${flip ? "lg:order-2" : ""}`}
         variants={scaleIn}
         initial="hidden"
         whileInView="visible"
         viewport={VIEWPORT_ONCE}
       >
-        <div className="flex items-baseline justify-between border-b hairline bg-white/[0.025] px-5 py-3.5">
-          <span className="text-[15px] font-semibold tracking-tight text-ink">
-            {project.name}
+        <Link
+          href={`/projects/${project.id}`}
+          aria-label={`Open the ${project.name} case study`}
+          className="group relative block overflow-hidden rounded-2xl border hairline bg-raised"
+        >
+          <span className="flex items-baseline justify-between border-b hairline bg-white/[0.025] px-5 py-3.5">
+            <span className="text-[15px] font-semibold tracking-tight text-ink">
+              {project.name}
+            </span>
+            <span className="text-eyebrow">{project.date}</span>
           </span>
-          <span className="text-eyebrow">{project.date}</span>
-        </div>
-        <div className="aspect-[4/3] w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
-          <Visual />
-        </div>
-        <div className="flex items-baseline justify-between border-t hairline px-5 py-3.5">
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-40">
-            {project.category}
+          <span className="block aspect-[4/3] w-full transition-transform duration-[900ms] ease-[cubic-bezier(0.16,1,0.3,1)] group-hover:scale-[1.03]">
+            <Visual />
           </span>
-          <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-25 transition-colors duration-500 group-hover:text-accent">
-            View case ↓
+          <span className="flex items-baseline justify-between border-t hairline px-5 py-3.5">
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-40">
+              {project.category}
+            </span>
+            <span className="font-mono text-[10px] uppercase tracking-[0.14em] text-ink-25 transition-colors duration-500 group-hover:text-accent">
+              Open case study →
+            </span>
           </span>
-        </div>
+        </Link>
       </motion.div>
 
       {/* narrative */}
@@ -104,6 +109,12 @@ export default function CaseStudy({
             {project.stack.join(" · ")}
           </p>
           <span className="ml-auto flex gap-5">
+            <SlideSwapLink
+              href={`/projects/${project.id}`}
+              className="font-mono text-[11px] uppercase tracking-[0.18em] text-ink"
+              label="Case study"
+              suffix={<span className="text-accent">→</span>}
+            />
             {project.links.map((link) => (
               <SlideSwapLink
                 key={link.label}

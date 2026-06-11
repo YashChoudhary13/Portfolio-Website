@@ -114,7 +114,7 @@ export default function DeepVerifyVisual() {
           fontSize={26}
           fontWeight={700}
           letterSpacing={-0.5}
-          style={{ fontFamily: "var(--font-archivo)" }}
+          style={{ fontFamily: "var(--font-display)" }}
         >
           SYNTHETIC — 96.8% CONFIDENCE
         </text>

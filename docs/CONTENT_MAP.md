@@ -88,3 +88,23 @@ must trace back to a line here. No invented metrics.
 - Primary CTA: email yashchoudhary13@outlook.com
 - Secondary: GitHub, LinkedIn, LeetCode
 - Footer: location + "available for work" signal
+
+## Projects expansion (/projects + /projects/[slug]) — src/lib/caseStudies.ts
+
+Same traceability rule. The case studies reuse only the facts above
+(DeepVerify, REVO, The MEX rows in Metrics/Case studies/Experience).
+Additional notes:
+
+- The MEX gets a full case study (slug `themex`) built from the Experience
+  entry: Stripe embedded checkout, 32+ items, JWT/RBAC (customer/staff/admin
+  is the standard reading of the RBAC claim), PostgreSQL + Drizzle,
+  WebSockets → 60% faster confirmations, Aug–Nov 2025, Ireland, paid client.
+- Gallery frames contain illustrative product-UI mock content (sample job
+  IDs, wall-clock timestamps, request lines) in the same spirit as the
+  existing DeepVerify/REVO hero visuals — they must not assert NEW metric
+  claims beyond this file.
+- Live-product panel: no public product URLs exist yet, so DeepVerify/REVO
+  point to the GitHub profile ("Public build") and The MEX is labeled
+  "Private client build" with a mailto walkthrough CTA. No invented domains.
+- Learnings sections are reflective engineering commentary, not metric
+  claims.

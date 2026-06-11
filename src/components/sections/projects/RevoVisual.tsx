@@ -26,7 +26,7 @@ const STATS = [
 export default function RevoVisual() {
   return (
     <div className="flex h-full w-full items-center justify-center p-6 sm:p-10">
-      <div className="w-full overflow-hidden rounded-xl border hairline bg-[#0a0b0c]">
+      <div className="w-full overflow-hidden rounded-xl border hairline bg-raised">
         {/* browser chrome */}
         <div className="flex items-center gap-3 border-b hairline px-4 py-3">
           <span className="flex gap-1.5">

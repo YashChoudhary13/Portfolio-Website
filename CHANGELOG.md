@@ -2,7 +2,33 @@
 
 All notable changes to this project. Newest first.
 
-## 2026-06-11 — Milestone 9 complete: QA-verified, Lighthouse-passing
+## 2026-06-11 — Milestone 10: Projects expansion (/projects + case studies)
+
+- New route /projects: editorial archive index — display-type rows, status/
+  live chips, cursor-trailing preview panel (project visual + key metric),
+  mobile editorial media rows; no card grid
+- New routes /projects/[slug] (deepverify · revo · themex), SSG via
+  generateStaticParams + per-page metadata. Case-study anatomy: hero
+  (display name, why-it-matters, meta grid) → live-product access (inline
+  glass panel + floating pill that appears when the inline panel scrolls
+  off) → interactive SystemFlow pipeline (always-running connector pulses,
+  click-to-inspect stages, vertical variant on mobile) → challenge →
+  solution decisions w/ explicit tradeoffs → expandable ArchStack (rail
+  pulse, single-open layers) → MetricsBand (CountUp) → Gallery (crafted
+  board/bars/log/json frames, scroll-drift column) → learnings → next-case
+  hand-off
+- src/lib/caseStudies.ts: all case-study content, serializable, traces to
+  CONTENT_MAP; TheMexVisual (kitchen order board) joins the visual set
+- Nav: Projects item + route-aware behavior (hash links defer through a
+  navigation back to /), active-route dot, SmoothScroll Lenis reset on
+  route change, opacity-only route fade (template.tsx), SlideSwapLink
+  internal-href support via next/link
+- Homepage workflow section (S5 Architecture) made explorable: nodes are
+  buttons (mouse + keyboard); selecting one lights its data paths, dims the
+  rest, and opens an internals panel (flow chips + facts) — same visual
+  language, deeper interaction; mobile list expands inline
+- Homepage case studies now link into /projects/[slug] (frame + footer +
+  "Case study →" link)
 
 - Visual QA loop via dev-browser (scripts/qa-*.js): all sections verified
   at 1440×900 and 390×844, knob detent interaction verified by click test
