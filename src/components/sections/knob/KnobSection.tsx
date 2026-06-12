@@ -202,7 +202,7 @@ export default function KnobSection() {
     <section
       ref={sectionRef}
       id="capabilities"
-      className="border-y hairline bg-raised"
+      className="border-t hairline bg-raised"
       aria-label="Capabilities — interactive control"
     >
       <div className="container-x py-[clamp(6rem,14vh,12.5rem)]">

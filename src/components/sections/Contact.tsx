@@ -19,13 +19,13 @@ export default function Contact() {
       className="relative overflow-clip pt-[clamp(6rem,16vh,14rem)] pb-24"
       aria-label="Contact"
     >
-      {/* ambient field */}
+      {/* ambient field — the teal aura the closing act sits in (reference) */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0"
         style={{
           background:
-            "radial-gradient(60% 50% at 20% 0%, rgba(102,240,194,0.07), transparent 70%), radial-gradient(55% 45% at 80% 8%, rgba(90,140,255,0.05), transparent 70%)",
+            "radial-gradient(70% 60% at 22% 0%, rgba(102,240,194,0.17), transparent 70%), radial-gradient(60% 50% at 80% 4%, rgba(82,113,255,0.11), transparent 70%), radial-gradient(80% 55% at 50% 30%, rgba(102,240,194,0.06), transparent 75%)",
         }}
       />
 

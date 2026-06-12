@@ -24,7 +24,8 @@
       "WebFetch(domain:cdn.simpleicons.org)",
       "Bash(npx tsc *)",
       "Bash(node -e ' *)",
-      "Bash(git log *)"
+      "Bash(git log *)",
+      "Read(//c/Users/choud/AppData/Local/Temp/claude/Z--Projects-Projects-Portfolio-Website/01da61a7-4ec7-441e-8299-e998a21893c6/tasks/**)"
     ]
   }
 }

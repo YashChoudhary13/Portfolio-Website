@@ -54,8 +54,9 @@ must trace back to a line here. No invented metrics.
 > 2026-06 refinement: the homepage "Selected work" section was removed —
 > projects live exclusively at /projects (archive) and /projects/[slug]
 > (case studies). Homepage structure is now: Hero → Capabilities →
-> How I build → Experience → About → Contact (01–05), with Experience +
-> About presented as a light editorial band.
+> How I build → Experience → About → Contact (01–05), alternating moods
+> (dark / light / dark / light / dark-teal) with aurora MoodBlend seams
+> per the reference screenshots in /resources.
 
 ## Case study 1 — DeepVerify (Dec 2025)
 

@@ -73,20 +73,23 @@ function FlowPath({
       <motion.path
         d={p.d}
         fill="none"
-        stroke={lit ? "rgba(102,240,194,0.45)" : "rgba(255,255,255,0.22)"}
         strokeWidth={1.5}
-        style={{ pathLength, transition: "stroke 0.5s" }}
+        style={{
+          pathLength,
+          transition: "stroke 0.5s",
+          stroke: lit ? "var(--color-accent-dim)" : "var(--color-ink-25)",
+        }}
       />
       {p.caption && (
         <text
           x={p.caption.x}
           y={p.caption.y}
-          fill={lit ? "rgba(102,240,194,0.65)" : "rgba(255,255,255,0.25)"}
           fontSize={9}
           letterSpacing={1.8}
           style={{
             fontFamily: "var(--font-plex-mono)",
             transition: "fill 0.5s",
+            fill: lit ? "var(--color-accent)" : "var(--color-ink-25)",
           }}
         >
           {p.caption.text}
@@ -95,12 +98,12 @@ function FlowPath({
       {/* data pulse, runs forever once the path exists */}
       {!reduced && (
         <motion.g style={{ opacity: pulseOpacity }}>
-          <circle r={lit ? 5 : 4} fill={`rgba(102,240,194,${lit ? 0.35 : 0.25})`}>
+          <circle r={lit ? 5 : 4} style={{ fill: "var(--color-accent-dim)" }}>
             <animateMotion dur={p.dur} begin={p.begin} repeatCount="indefinite">
               <mpath href={`#${p.id}`} />
             </animateMotion>
           </circle>
-          <circle r={lit ? 2.5 : 2} fill="#66f0c2">
+          <circle r={lit ? 2.5 : 2} style={{ fill: "var(--color-accent)" }}>
             <animateMotion dur={p.dur} begin={p.begin} repeatCount="indefinite">
               <mpath href={`#${p.id}`} />
             </animateMotion>
@@ -150,7 +153,7 @@ function NodeDetail({ node }: { node: Node }) {
                   →
                 </span>
               )}
-              <span className="rounded-lg border hairline bg-white/[0.03] px-3 py-1.5 font-mono text-[10px] tracking-[0.1em] text-ink-65">
+              <span className="rounded-lg border hairline bg-glass px-3 py-1.5 font-mono text-[10px] tracking-[0.1em] text-ink-65">
                 {step}
               </span>
             </motion.span>
@@ -206,7 +209,7 @@ export default function Architecture() {
           {/* dotted field */}
           <defs>
             <pattern id="arch-dots" width="28" height="28" patternUnits="userSpaceOnUse">
-              <circle cx="1" cy="1" r="1" fill="rgba(255,255,255,0.05)" />
+              <circle cx="1" cy="1" r="1" style={{ fill: "var(--color-glass)" }} />
             </pattern>
           </defs>
           <rect y="40" width="1200" height="412" fill="url(#arch-dots)" />
@@ -257,33 +260,39 @@ export default function Architecture() {
                     width={W}
                     height={H}
                     rx={14}
-                    fill={
-                      isActive ? "rgba(102,240,194,0.05)" : "rgba(255,255,255,0.04)"
-                    }
-                    stroke={
-                      isActive ? "rgba(102,240,194,0.55)" : "rgba(255,255,255,0.1)"
-                    }
-                    style={{ transition: "stroke 0.5s, fill 0.5s" }}
-                    className="group-hover:stroke-[rgba(102,240,194,0.4)] group-focus-visible:stroke-2 group-focus-visible:stroke-[rgba(102,240,194,0.7)]"
+                    style={{
+                      transition: "stroke 0.5s, fill 0.5s",
+                      fill: isActive
+                        ? "color-mix(in oklab, var(--color-accent) 7%, transparent)"
+                        : "var(--color-glass)",
+                      stroke: isActive
+                        ? "color-mix(in oklab, var(--color-accent) 60%, transparent)"
+                        : "var(--color-hairline)",
+                    }}
+                    className="group-hover:stroke-[color:var(--color-accent-dim)] group-focus-visible:stroke-2 group-focus-visible:stroke-[color:var(--color-accent)]"
                   />
                   <text
                     x={pos.x + 20}
                     y={pos.y + 34}
-                    fill="#ffffff"
                     fontSize={16}
                     fontWeight={650}
                     letterSpacing={-0.3}
-                    style={{ fontFamily: "var(--font-display)" }}
+                    style={{
+                      fontFamily: "var(--font-display)",
+                      fill: "var(--color-ink)",
+                    }}
                   >
                     {node.label}
                   </text>
                   <text
                     x={pos.x + 20}
                     y={pos.y + 58}
-                    fill="rgba(255,255,255,0.4)"
                     fontSize={8.5}
                     letterSpacing={0.6}
-                    style={{ fontFamily: "var(--font-plex-mono)" }}
+                    style={{
+                      fontFamily: "var(--font-plex-mono)",
+                      fill: "var(--color-ink-40)",
+                    }}
                   >
                     {node.tech.join(" · ").toUpperCase()}
                   </text>
@@ -291,10 +300,14 @@ export default function Architecture() {
                   <text
                     x={pos.x + W - 22}
                     y={pos.y + 32}
-                    fill={isActive ? "#66f0c2" : "rgba(255,255,255,0.25)"}
                     fontSize={13}
                     textAnchor="middle"
-                    style={{ transition: "fill 0.5s" }}
+                    style={{
+                      transition: "fill 0.5s",
+                      fill: isActive
+                        ? "var(--color-accent)"
+                        : "var(--color-ink-25)",
+                    }}
                   >
                     {isActive ? "−" : "+"}
                   </text>
@@ -336,7 +349,7 @@ export default function Architecture() {
 
       {/* mobile: vertical flow, tap to expand */}
       <div className="mt-12 md:hidden">
-        <div className="relative ml-2 border-l border-dashed border-white/15 pl-6">
+        <div className="relative ml-2 border-l border-dashed hairline pl-6">
           {architecture.nodes.map((node, i) => {
             const isActive = active === node.id;
             return (
@@ -390,7 +403,7 @@ export default function Architecture() {
                                   →
                                 </span>
                               )}
-                              <span className="rounded-md border hairline bg-white/[0.03] px-2 py-1 font-mono text-[9px] tracking-[0.08em] text-ink-65">
+                              <span className="rounded-md border hairline bg-glass px-2 py-1 font-mono text-[9px] tracking-[0.08em] text-ink-65">
                                 {step}
                               </span>
                             </span>

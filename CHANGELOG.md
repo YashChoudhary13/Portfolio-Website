@@ -2,6 +2,25 @@
 
 All notable changes to this project. Newest first.
 
+## 2026-06-12 — Milestone 11.1: Alternating moods + aurora seams
+
+- Restructured the homepage rhythm per the reference screenshots in
+  /resources: dark opening act (Hero + Capabilities) → LIGHT How I build
+  → DARK Experience → LIGHT About → dark Contact under a stronger teal
+  aura. True alternation instead of one clumped light band.
+- New MoodBlend component (+ globals.css .mood-blend--down/--up/--vivid):
+  the aurora seam — neutral oklab ramp between the two surface colors
+  with mint/blue horizon glows hugging the light side, radii tuned so the
+  glow alpha reaches zero exactly at the paper edge (no tint lines).
+  Vivid variants at the two big moments (into the diagram, into contact).
+- How I build diagram re-themed via tokens: all hardcoded SVG
+  whites/mints moved to CSS vars (style-based, where var() is reliable in
+  SVG), chips/borders to token utilities — renders as blueprint-on-paper
+  inside .theme-light, unchanged on dark.
+- Removed the rounded-sheet wrapper treatment (blends replace hard cuts);
+  Experience back on dark (token classes adapt automatically); Contact
+  ambient field amplified to the reference's teal glow.
+
 ## 2026-06-12 — Milestone 11: Refinement pass (nav fix, light band, human hero)
 
 - FIXED cross-route anchor navigation: hash targets now hand off through

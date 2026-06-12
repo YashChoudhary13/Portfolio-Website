@@ -46,12 +46,18 @@ action — not taken unilaterally).
   honors /#hash deep links). SmoothScroll resets Lenis to top on pathname
   change EXCEPT when a hash is present. template.tsx = opacity-only route
   fade (transforms would break fixed-position children)
-- Homepage M11: sections numbered 01–05 (Capabilities #capabilities, How I
-  build, Experience #experience, About #about, Contact #contact); Proof +
-  Selected-work sections deleted (content.ts no longer exports metrics/
-  projects). Experience+About wrapped in .theme-light (globals.css):
-  scoped CSS-var override — keep raw white-alpha utilities OUT of those
-  two sections, use token utilities (bg-ink-25 etc.) so both themes work
+- Homepage M11/11.1: sections numbered 01–05 (Capabilities #capabilities,
+  How I build, Experience #experience, About #about, Contact #contact);
+  Proof + Selected-work sections deleted (content.ts no longer exports
+  metrics/projects). Mood rhythm: dark (Hero+Knob) → LIGHT How-I-build →
+  dark Experience → LIGHT About → dark Contact (teal aura). Light scope =
+  .theme-light CSS-var override; every dark↔light seam is a MoodBlend
+  aurora (shared/MoodBlend.tsx + .mood-blend CSS — glow radii tuned to
+  zero out at the paper edge; pass exact surface colors per instance).
+  RULE: inside light-scoped sections AND the Architecture diagram use
+  token utilities / var()-based styles only — no raw white-alpha (the
+  diagram SVG uses style={{fill/stroke: var(...)}} because var() in SVG
+  presentation ATTRIBUTES is unreliable)
 - Live-product links: caseStudies[slug].live.href — currently GitHub profile /
   mailto placeholders-of-record; swap to real product URLs when they exist
 - Motion constants ONLY in src/lib/motion.ts (springs: gentle/responsive/snap;

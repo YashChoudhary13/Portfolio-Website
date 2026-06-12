@@ -155,6 +155,53 @@ html.lenis body {
   color: #f4f2ed;
 }
 
+/* ------ mood blend ------
+   The aurora seam between dark and light acts (reference: black dissolving
+   through a mint/blue horizon glow into paper). The vertical ramp is a
+   neutral oklab mix of the two surfaces; all color comes from the two
+   glow radials hugging the light side. --dark/--light set per instance. */
+.mood-blend {
+  --glow-a: rgba(102, 240, 194, 0.2);
+  --glow-b: rgba(82, 113, 255, 0.15);
+  height: clamp(12rem, 26vh, 18rem);
+}
+
+.mood-blend--vivid {
+  --glow-a: rgba(102, 240, 194, 0.48);
+  --glow-b: rgba(82, 113, 255, 0.38);
+  height: clamp(16rem, 36vh, 24rem);
+}
+
+/* Glow centers sit toward the light side but their falloff (stop 64% of a
+   55%-radius ellipse) reaches zero BEFORE the light edge — no tint line
+   where the blend meets paper. The ramp eases over a longer run. */
+
+/* dark above → light below */
+.mood-blend--down {
+  background:
+    radial-gradient(115% 55% at 16% 64%, var(--glow-a) 0%, transparent 64%),
+    radial-gradient(125% 60% at 86% 60%, var(--glow-b) 0%, transparent 64%),
+    linear-gradient(
+      180deg,
+      var(--dark) 6%,
+      color-mix(in oklab, var(--dark) 55%, var(--light)) 44%,
+      var(--light) 94%
+    );
+}
+
+/* light above → dark below */
+.mood-blend--up {
+  background:
+    radial-gradient(115% 55% at 84% 36%, var(--glow-a) 0%, transparent 64%),
+    radial-gradient(125% 60% at 14% 40%, var(--glow-b) 0%, transparent 64%),
+    linear-gradient(
+      0deg,
+      var(--dark) 6%,
+      color-mix(in oklab, var(--dark) 55%, var(--light)) 44%,
+      var(--light) 94%
+    );
+}
+
 @media (prefers-reduced-motion: reduce) {
   *,
   *::before,
