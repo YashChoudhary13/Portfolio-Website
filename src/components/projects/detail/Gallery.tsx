@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useRef, type ReactNode } from "react";
 import {
   motion,
@@ -201,6 +202,20 @@ function FrameContent({ frame }: { frame: GalleryFrame }) {
 
     case "json":
       return <JsonCode code={frame.code} />;
+
+    case "image":
+      return (
+        <div className="overflow-hidden rounded-lg border hairline bg-black/20">
+          <Image
+            src={frame.src}
+            alt={frame.alt}
+            width={frame.width}
+            height={frame.height}
+            sizes="(max-width: 1024px) 100vw, 640px"
+            className="h-auto w-full"
+          />
+        </div>
+      );
   }
 }
 

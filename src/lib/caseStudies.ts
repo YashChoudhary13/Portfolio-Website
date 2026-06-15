@@ -81,6 +81,17 @@ export type GalleryFrame =
       title: string;
       caption: string;
       code: string;
+    }
+  | {
+      kind: "image";
+      title: string;
+      caption: string;
+      /** path under /public */
+      src: string;
+      alt: string;
+      /** intrinsic pixel size for layout / next-image */
+      width: number;
+      height: number;
     };
 
 export type CaseStudy = {
@@ -134,17 +145,17 @@ export const caseStudies: readonly CaseStudy[] = [
     date: "Dec 2025",
     timeline: "Nov — Dec 2025",
     role: "Solo build",
-    status: "shipped",
-    statusLabel: "Shipped · Public build",
+    status: "live",
+    statusLabel: "Live · deepverify.site",
     outcome:
-      "Five convolutional models vote on every image — synthetic media flagged in 1.8 seconds.",
+      "Five convolutional models vote on every image — a deepfake detector live on deepverify.site.",
     heroSub:
       "A deepfake detection platform built on one premise: no single detector deserves your trust. Five CNN architectures examine every upload in parallel, and their agreement — or disagreement — becomes the verdict.",
     live: {
-      badge: "Public build",
-      label: "github.com/yashchoudhary13",
-      cta: "Open repository",
-      href: "https://github.com/yashchoudhary13",
+      badge: "Live product",
+      label: "deepverify.site",
+      cta: "Open DeepVerify",
+      href: "https://deepverify.site",
       external: true,
     },
     flow: [
@@ -307,41 +318,51 @@ export const caseStudies: readonly CaseStudy[] = [
       {
         id: "infra",
         name: "Infrastructure",
-        tech: "DOCKER",
-        body: "API and workers containerized separately — reproducible builds, independent scaling.",
+        tech: "VERCEL · DOCKER · R2",
+        body: "Next.js front on Vercel; the API, workers and Redis run as a Docker Compose stack on a DigitalOcean droplet, with model weights streamed from Cloudflare R2 and data on Supabase Postgres.",
         items: [
-          { label: "API container", note: "stateless, scales wide" },
-          { label: "Worker containers", note: "scale with inference load" },
-          { label: "One compose up", note: "full stack, anywhere" },
+          { label: "Vercel front", note: "deepverify.site · Lighthouse 100" },
+          { label: "Droplet API", note: "api.deepverify.site · compose stack" },
+          { label: "R2 model store", note: "5 weights · ~555 MB, pulled on boot" },
         ],
       },
     ],
     metrics: [
-      {
-        value: 40,
-        suffix: "K",
-        label: "Training images",
-        note: "balanced — 20K real / 20K synthetic",
-      },
       {
         value: 5,
         label: "Model ensemble",
         note: "EfficientNet · ResNet · Xception · MobileNet · custom CNN",
       },
       {
-        value: "−12%",
-        label: "False positives",
-        note: "versus the best single model",
+        value: 99.2,
+        suffix: "%",
+        decimals: 1,
+        label: "Reported accuracy",
+        note: "5-model weighted vote — shown on the live product",
       },
       {
-        value: 1.8,
-        suffix: "s",
-        decimals: 1,
-        label: "Average detection",
-        note: "async FastAPI + Redis pipeline",
+        value: 100,
+        label: "Lighthouse — desktop",
+        note: "perf 100 · CLS 0 · LCP 0.7s (mobile 95)",
+      },
+      {
+        value: 40,
+        suffix: "K",
+        label: "Training images",
+        note: "balanced — 20K real / 20K synthetic",
       },
     ],
     gallery: [
+      {
+        kind: "image",
+        title: "deepverify.site — live",
+        caption:
+          "The production landing: multi-model verdicts with heatmaps and confidence scores.",
+        src: "/case-studies/deepverify-hero.jpg",
+        alt: "DeepVerify homepage — Multi-Model Deepfake Detection",
+        width: 1280,
+        height: 800,
+      },
       {
         kind: "board",
         title: "Inference queue",
@@ -719,27 +740,27 @@ export const caseStudies: readonly CaseStudy[] = [
     timeline: "Aug — Nov 2025",
     role: "Freelance full-stack — paid client",
     status: "live",
-    statusLabel: "In production · Ireland",
+    statusLabel: "Live · themexcobh.shop",
     outcome:
-      "A restaurant's order pipeline rebuilt end to end — confirmations land 60% faster over live WebSockets.",
+      "A restaurant's order pipeline rebuilt end to end — live in Ireland, confirmations land faster over WebSockets.",
     heroSub:
-      "An order management platform for The MEX Restaurant in Ireland: Stripe embedded checkout, 32+ menu items, role-gated staff tools — and a kitchen that knows the moment a customer pays.",
+      "An order management platform for The MEX Restaurant in Ireland: Stripe embedded checkout, 37 menu items across 10 categories, role-gated staff tools — and a kitchen that knows the moment a customer pays.",
     live: {
-      badge: "Private client build",
-      label: "In production — Ireland",
-      cta: "Request a walkthrough",
-      href: "mailto:yashchoudhary13@outlook.com?subject=The%20MEX%20walkthrough",
-      external: false,
+      badge: "Live · client build",
+      label: "themexcobh.shop",
+      cta: "Open the storefront",
+      href: "https://themexcobh.shop",
+      external: true,
     },
     flow: [
       {
         id: "storefront",
         label: "Storefront",
-        sub: "32+ items",
+        sub: "37 items",
         detail: {
           body: "The customer-facing menu: browse, build an order, check out — without ever leaving the page.",
           points: [
-            "32+ menu items with live availability",
+            "37 menu items across 10 categories with live availability",
             "Cart state held client-side until checkout",
             "Order status visible to the customer in real time",
           ],
@@ -850,7 +871,7 @@ export const caseStudies: readonly CaseStudy[] = [
         tech: "REACT · TYPESCRIPT",
         body: "Customer-facing menu, cart and live order tracking.",
         items: [
-          { label: "Menu", note: "32+ items, live availability" },
+          { label: "Menu", note: "37 items · 10 categories" },
           { label: "Cart + checkout", note: "Stripe embedded in-page" },
           { label: "Order tracking", note: "live over WebSocket" },
         ],
@@ -908,23 +929,33 @@ export const caseStudies: readonly CaseStudy[] = [
         note: "WebSocket push vs the old polling flow",
       },
       {
-        value: 32,
-        suffix: "+",
+        value: 37,
         label: "Menu items live",
-        note: "with Stripe embedded checkout",
+        note: "across 10 categories · Stripe checkout",
+      },
+      {
+        value: 60,
+        suffix: " fps",
+        label: "Scroll performance",
+        note: "steady 60fps on the live build (measured)",
       },
       {
         value: 3,
         label: "Audiences, one API",
         note: "customer · staff · admin via JWT + RBAC",
       },
-      {
-        value: "0→1",
-        label: "Scoped, built, shipped",
-        note: "solo delivery for a paying client",
-      },
     ],
     gallery: [
+      {
+        kind: "image",
+        title: "themexcobh.shop — live",
+        caption:
+          "The live storefront: flame-grilled hero, 37-item menu, Stripe embedded checkout.",
+        src: "/case-studies/mex-hero.jpg",
+        alt: "The MEX storefront — flame-grilled hero with live menu",
+        width: 1280,
+        height: 800,
+      },
       {
         kind: "board",
         title: "Kitchen order board",

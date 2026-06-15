@@ -58,8 +58,11 @@ action — not taken unilaterally).
   token utilities / var()-based styles only — no raw white-alpha (the
   diagram SVG uses style={{fill/stroke: var(...)}} because var() in SVG
   presentation ATTRIBUTES is unreliable)
-- Live-product links: caseStudies[slug].live.href — currently GitHub profile /
-  mailto placeholders-of-record; swap to real product URLs when they exist
+- Live-product links: caseStudies[slug].live.href — DeepVerify →
+  https://deepverify.site, The MEX → https://themexcobh.shop (both deployed
+  2026-06; REVO still GitHub-of-record). Gallery has an `image` frame kind
+  (Gallery.tsx) rendering real screenshots under public/case-studies/*.jpg.
+  Evidence + measured numbers: Z:\Projects\Projects\CASE-STUDY-EVIDENCE.md
 - Motion constants ONLY in src/lib/motion.ts (springs: gentle/responsive/snap;
   expo tweens for scroll reveals)
 - Lenis + GSAP single-ticker wiring in providers/SmoothScroll.tsx (context
