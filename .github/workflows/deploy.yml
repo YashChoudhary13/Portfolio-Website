@@ -1,0 +1,44 @@
+name: Deploy to Droplet
+
+on:
+  push:
+    branches: [main, master]
+    paths-ignore:
+      - "**.md"
+  workflow_dispatch:
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://yashchoudhary.xyz
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+          cache: npm
+
+      - run: npm ci
+      - run: npm run build   # static export → out/
+
+      # Clean the target so old hashed chunks don't accumulate
+      - name: Clear old build on droplet
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: root
+          key: ${{ secrets.DO_SSH_KEY }}
+          script: rm -rf /apps/portfolio/out && mkdir -p /apps/portfolio
+
+      - name: Upload static build
+        uses: appleboy/scp-action@v0.1.7
+        with:
+          host: ${{ secrets.DO_HOST }}
+          username: root
+          key: ${{ secrets.DO_SSH_KEY }}
+          source: "out"
+          target: "/apps/portfolio"

@@ -1,5 +1,8 @@
 import { ImageResponse } from "next/og";
 
+// Generate once at build time so the route is compatible with `output: export`.
+export const dynamic = "force-static";
+
 export const size = { width: 1200, height: 630 };
 export const contentType = "image/png";
 export const alt =
