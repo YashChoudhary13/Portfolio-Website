@@ -20,7 +20,7 @@ export default function Home() {
       <Hero />
       <KnobSection />
 
-      <MoodBlend to="light" dark="#0a0a0b" light="#0e0b16" vivid />
+      <MoodBlend to="light" dark="#050505" light="#161221" vivid />
       <div className="mood-indigo">
         <Architecture />
       </div>
@@ -28,7 +28,7 @@ export default function Home() {
       <MoodBlend to="dark" light="#1b1530" dark="#050505" />
       <Experience />
 
-      <MoodBlend to="light" dark="#050505" light="#14101f" />
+      <MoodBlend to="light" dark="#050505" light="#1c1533" />
       <div className="mood-plum">
         <About />
       </div>
