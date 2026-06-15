@@ -10,8 +10,8 @@
   --color-ink-25: rgba(255, 255, 255, 0.25);
   --color-hairline: rgba(255, 255, 255, 0.08);
   --color-glass: rgba(255, 255, 255, 0.04);
-  --color-accent: #66f0c2;
-  --color-accent-dim: rgba(102, 240, 194, 0.35);
+  --color-accent: #c2a8df; /* soft premium lilac (was neon mint) */
+  --color-accent-dim: rgba(194, 168, 223, 0.35);
 
   /* ------ typography ------ */
   --font-sans: var(--font-inter), system-ui, sans-serif;
@@ -129,46 +129,50 @@ html.lenis body {
   border-color: var(--color-hairline);
 }
 
-/* ------ light editorial band ------
-   Scoped re-theme: every token-driven utility (text-ink*, hairline,
-   bg-base/raised, accent) flips with the variables — sections keep their
-   markup and motion, only the mood changes. Accent deepens for contrast
-   on paper. */
-.theme-light {
-  --color-base: #f0eee9; /* matches the band gradient — bg-base masks blend in */
-  --color-raised: #f6f5f1;
-  --color-ink: #16161a;
-  --color-ink-65: rgba(22, 22, 26, 0.7);
-  --color-ink-40: rgba(22, 22, 26, 0.56); /* lifted for AA on paper */
-  --color-ink-25: rgba(22, 22, 26, 0.3);
-  --color-hairline: rgba(22, 22, 26, 0.12);
-  --color-glass: rgba(22, 22, 26, 0.04);
-  --color-accent: #087f5b;
-  --color-accent-dim: rgba(8, 127, 91, 0.4);
-  --stroke-faint: rgba(22, 22, 26, 0.09);
-  background: linear-gradient(180deg, #f4f2ed 0%, #eae8e2 100%);
+/* ------ tonal dark bands ------
+   The body no longer flips to light paper. Instead each "act" gets its own
+   subtle dark identity inside one premium atmosphere — charcoal → deep indigo
+   → dark plum. Ink stays light (inherits root), so every token-driven utility
+   works unchanged; only the surface tone and a soft ambient glow shift. The
+   accent softens to a muted, non-neon hue per band for an elegant highlight. */
+.mood-indigo {
+  --color-base: #16121f; /* deep indigo */
+  --color-raised: #1b1530;
+  --color-accent: #b9a8e6; /* muted lavender — premium, not neon */
+  --color-accent-dim: rgba(185, 168, 230, 0.32);
+  --stroke-faint: rgba(255, 255, 255, 0.06);
+  background:
+    radial-gradient(120% 78% at 50% -6%, rgba(123, 97, 178, 0.16), transparent 62%),
+    linear-gradient(180deg, #0e0b16 0%, #16121f 46%, #1b1530 100%);
   color: var(--color-ink);
 }
 
-.theme-light ::selection {
-  background: #087f5b;
-  color: #f4f2ed;
+.mood-plum {
+  --color-base: #1b1530; /* dark plum */
+  --color-raised: #241a3d;
+  --color-accent: #d3a9c9; /* muted mauve/rose — warm, soft */
+  --color-accent-dim: rgba(211, 169, 201, 0.3);
+  --stroke-faint: rgba(255, 255, 255, 0.06);
+  background:
+    radial-gradient(120% 78% at 50% -6%, rgba(168, 104, 150, 0.15), transparent 62%),
+    linear-gradient(180deg, #14101f 0%, #1b1530 46%, #241a3d 100%);
+  color: var(--color-ink);
 }
 
 /* ------ mood blend ------
-   The aurora seam between dark and light acts (reference: black dissolving
-   through a mint/blue horizon glow into paper). The vertical ramp is a
-   neutral oklab mix of the two surfaces; all color comes from the two
-   glow radials hugging the light side. --dark/--light set per instance. */
+   A soft tonal seam between two dark acts — charcoal dissolving through a
+   warm violet/mauve haze into the next tone. The vertical ramp is an oklab
+   mix of the two surfaces; the colour is two low-opacity glow radials, muted
+   and premium (no neon). --dark/--light set per instance (both dark now). */
 .mood-blend {
-  --glow-a: rgba(102, 240, 194, 0.2);
-  --glow-b: rgba(82, 113, 255, 0.15);
+  --glow-a: rgba(150, 112, 190, 0.14); /* soft violet */
+  --glow-b: rgba(170, 110, 150, 0.1); /* warm mauve */
   height: clamp(12rem, 26vh, 18rem);
 }
 
 .mood-blend--vivid {
-  --glow-a: rgba(102, 240, 194, 0.48);
-  --glow-b: rgba(82, 113, 255, 0.38);
+  --glow-a: rgba(160, 116, 196, 0.22);
+  --glow-b: rgba(182, 116, 156, 0.16);
   height: clamp(16rem, 36vh, 24rem);
 }
 

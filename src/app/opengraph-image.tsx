@@ -46,7 +46,7 @@ export default function OpengraphImage() {
                 width: 12,
                 height: 12,
                 borderRadius: 999,
-                background: "#66f0c2",
+                background: "#c2a8df",
               }}
             />
             AVAILABLE FOR WORK

@@ -34,7 +34,7 @@ export default function Hero() {
         className="absolute -right-1/4 -top-1/4 h-[80vmin] w-[80vmin] rounded-full opacity-50"
         style={{
           background:
-            "radial-gradient(closest-side, rgba(102,240,194,0.07), transparent 70%)",
+            "radial-gradient(closest-side, rgba(150,112,190,0.09), transparent 70%)",
         }}
       />
 

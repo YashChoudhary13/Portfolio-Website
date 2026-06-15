@@ -228,7 +228,7 @@ export default function KnobSection() {
               className="absolute inset-[-18%] rounded-full opacity-60"
               style={{
                 background:
-                  "radial-gradient(closest-side, rgba(102,240,194,0.05), rgba(255,255,255,0.03) 45%, transparent 72%)",
+                  "radial-gradient(closest-side, rgba(150,112,190,0.06), rgba(255,255,255,0.03) 45%, transparent 72%)",
               }}
             />
 

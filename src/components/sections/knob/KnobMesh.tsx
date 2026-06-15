@@ -124,8 +124,8 @@ export default function KnobMesh({
           <mesh position={[0, 0.402, -0.68]}>
             <cylinderGeometry args={[0.038, 0.038, 0.012, 24]} />
             <meshStandardMaterial
-              color="#66f0c2"
-              emissive="#66f0c2"
+              color="#c2a8df"
+              emissive="#c2a8df"
               emissiveIntensity={2.4}
               toneMapped={false}
             />

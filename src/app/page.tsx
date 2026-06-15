@@ -9,9 +9,10 @@ import MoodBlend from "@/components/shared/MoodBlend";
 import AnchorScroll from "@/components/providers/AnchorScroll";
 
 /**
- * The page alternates moods — dark opening act, then light/dark/light
- * through the body, closing dark under the contact glow. Every seam is a
- * MoodBlend aurora (reference recording), never a hard cut.
+ * One premium dark atmosphere with tonal acts — charcoal opening, a deep
+ * indigo "how I build" band, back to charcoal for experience, a dark plum
+ * "about" band, closing charcoal under the contact glow. Every seam is a
+ * soft MoodBlend tonal shift, never a hard cut.
  */
 export default function Home() {
   return (
@@ -19,20 +20,20 @@ export default function Home() {
       <Hero />
       <KnobSection />
 
-      <MoodBlend to="light" dark="#0a0a0b" light="#f4f2ed" vivid />
-      <div className="theme-light">
+      <MoodBlend to="light" dark="#0a0a0b" light="#0e0b16" vivid />
+      <div className="mood-indigo">
         <Architecture />
       </div>
 
-      <MoodBlend to="dark" light="#eae8e2" dark="#050505" />
+      <MoodBlend to="dark" light="#1b1530" dark="#050505" />
       <Experience />
 
-      <MoodBlend to="light" dark="#050505" light="#f4f2ed" />
-      <div className="theme-light">
+      <MoodBlend to="light" dark="#050505" light="#14101f" />
+      <div className="mood-plum">
         <About />
       </div>
 
-      <MoodBlend to="dark" light="#eae8e2" dark="#050505" vivid />
+      <MoodBlend to="dark" light="#241a3d" dark="#050505" vivid />
       <Contact />
       <Footer />
       <AnchorScroll />
