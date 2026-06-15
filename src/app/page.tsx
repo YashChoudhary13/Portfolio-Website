@@ -20,7 +20,8 @@ export default function Home() {
       <Hero />
       <KnobSection />
 
-      <MoodBlend to="light" dark="#050505" light="#161221" vivid />
+      {/* dark edge = #0a0a0b to match the Knob's bg-raised panel above it */}
+      <MoodBlend to="light" dark="#0a0a0b" light="#161221" />
       <div className="mood-indigo">
         <Architecture />
       </div>
@@ -33,7 +34,7 @@ export default function Home() {
         <About />
       </div>
 
-      <MoodBlend to="dark" light="#241a3d" dark="#050505" vivid />
+      <MoodBlend to="dark" light="#241a3d" dark="#050505" />
       <Contact />
       <Footer />
       <AnchorScroll />
