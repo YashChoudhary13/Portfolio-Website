@@ -165,28 +165,28 @@ html.lenis body {
    mix of the two surfaces; the colour is two low-opacity glow radials, muted
    and premium (no neon). --dark/--light set per instance (both dark now). */
 .mood-blend {
-  --glow-a: rgba(150, 112, 190, 0.16); /* soft violet bloom */
+  --glow-a: rgba(150, 112, 190, 0.18); /* soft violet bloom */
   height: clamp(7rem, 14vh, 10rem);
 }
 
 .mood-blend--vivid {
-  --glow-a: rgba(162, 116, 196, 0.24);
-  height: clamp(9rem, 18vh, 12.5rem);
+  --glow-a: rgba(160, 116, 196, 0.22);
+  height: clamp(8rem, 16vh, 11rem);
 }
 
-/* A smooth full-height oklab ramp between the two adjacent tones (both dark
-   now), with one soft violet bloom hugging the tonal side. The neighbouring
-   section's edge is a visibly tonal colour, so the ramp always reads as a
-   real transition — never a flat near-black band. */
+/* The bloom fills almost the whole seam — only a thin strip at the section
+   side stays the section's exact colour, so there is no flat dark slab before
+   the colour appears. The ramp front-loads (mostly transitioned by ~45%) so
+   the charcoal edge is just a hairline, never a band. */
 
 /* dark above → tonal below */
 .mood-blend--down {
   background:
-    radial-gradient(72% 95% at 50% 100%, var(--glow-a), transparent 74%),
+    radial-gradient(95% 115% at 50% 96%, var(--glow-a), transparent 86%),
     linear-gradient(
       180deg,
       var(--dark) 0%,
-      color-mix(in oklab, var(--dark) 50%, var(--light)) 50%,
+      color-mix(in oklab, var(--dark) 45%, var(--light)) 45%,
       var(--light) 100%
     );
 }
@@ -194,11 +194,11 @@ html.lenis body {
 /* tonal above → dark below */
 .mood-blend--up {
   background:
-    radial-gradient(72% 95% at 50% 0%, var(--glow-a), transparent 74%),
+    radial-gradient(95% 115% at 50% 4%, var(--glow-a), transparent 86%),
     linear-gradient(
       0deg,
       var(--dark) 0%,
-      color-mix(in oklab, var(--dark) 50%, var(--light)) 50%,
+      color-mix(in oklab, var(--dark) 45%, var(--light)) 45%,
       var(--light) 100%
     );
 }
