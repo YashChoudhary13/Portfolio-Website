@@ -142,8 +142,8 @@ html.lenis body {
   --color-accent-dim: rgba(185, 168, 230, 0.32);
   --stroke-faint: rgba(255, 255, 255, 0.06);
   background:
-    radial-gradient(100% 62% at 50% 42%, rgba(123, 97, 178, 0.15), transparent 72%),
-    linear-gradient(180deg, #161221 0%, #19132b 52%, #1b1530 100%);
+    radial-gradient(110% 82% at 50% 26%, rgba(123, 97, 178, 0.17), transparent 76%),
+    linear-gradient(180deg, #1a1430 0%, #1b1530 100%);
   color: var(--color-ink);
 }
 
@@ -154,8 +154,8 @@ html.lenis body {
   --color-accent-dim: rgba(211, 169, 201, 0.3);
   --stroke-faint: rgba(255, 255, 255, 0.06);
   background:
-    radial-gradient(100% 62% at 50% 42%, rgba(168, 104, 150, 0.14), transparent 72%),
-    linear-gradient(180deg, #1c1533 0%, #201839 52%, #241a3d 100%);
+    radial-gradient(110% 82% at 50% 26%, rgba(168, 104, 150, 0.15), transparent 76%),
+    linear-gradient(180deg, #211839 0%, #241a3d 100%);
   color: var(--color-ink);
 }
 

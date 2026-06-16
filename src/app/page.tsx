@@ -21,7 +21,7 @@ export default function Home() {
       <KnobSection />
 
       {/* dark edge = #0a0a0b to match the Knob's bg-raised panel above it */}
-      <MoodBlend to="light" dark="#0a0a0b" light="#161221" />
+      <MoodBlend to="light" dark="#0a0a0b" light="#1a1430" />
       <div className="mood-indigo">
         <Architecture />
       </div>
@@ -29,7 +29,7 @@ export default function Home() {
       <MoodBlend to="dark" light="#1b1530" dark="#050505" />
       <Experience />
 
-      <MoodBlend to="light" dark="#050505" light="#1c1533" />
+      <MoodBlend to="light" dark="#050505" light="#211839" />
       <div className="mood-plum">
         <About />
       </div>
